@@ -1,0 +1,15 @@
+{
+  "name": "front-end-web-development-with-react",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "front-end-web-development-with-react"
+  },
+  "author": "Diukarev Serhii",
+  "license": "ISC"
+}
