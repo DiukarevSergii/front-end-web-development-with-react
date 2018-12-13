@@ -1,13 +1,20 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
+import { Navbar, NavbarBrand } from 'reactstrap';
 import './App.css';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
+     <div className="App">
+         <Navbar dark color="primary">
+             <div className="container">
+                 <NavbarBrand href="/">Fallout 2078</NavbarBrand>
+             </div>
+         </Navbar>
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
+          <h1 className="App-title">Welcome to React 1312</h1>
           <p>
             Edit <code>src/App.js</code> and save to reload.
           </p>
@@ -20,6 +27,9 @@ class App extends Component {
             Learn React
           </a>
         </header>
+
+
+
       </div>
     );
   }
