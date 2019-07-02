@@ -1,19 +1,21 @@
 import React from 'react';
+import { Navbar, NavbarBrand } from 'reactstrap';
+// eslint-disable-next-line
 import logo from './logo.svg';
-import {Navbar, NavbarBrand} from 'reactstrap'
 import './App.css';
 
 // todo install eslint
 function App() {
-    return (
-        <div className="App">
-            <Navbar dark color="primary">
-                <div className="container">
-                    <NavbarBrand href="/">Ristorante Con Fusion</NavbarBrand>
-                </div>
-            </Navbar>
-        </div>
-    );
+  return (
+      // eslint-disable-next-line
+      <div className="App">
+        <Navbar dark color="primary">
+          <div className="container">
+            <NavbarBrand href="/">Ristorante Con Fusion</NavbarBrand>
+          </div>
+        </Navbar>
+      </div>
+  );
 }
 
 export default App;
