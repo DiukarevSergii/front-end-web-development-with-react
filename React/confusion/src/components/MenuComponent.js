@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 class Menu extends Component {
   static propTypes = {
-    dishes: PropTypes.string.isRequired,
+    dishes: PropTypes.arrayOf(PropTypes.object).isRequired,
   };
 
   constructor(props) {
