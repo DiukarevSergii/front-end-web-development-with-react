@@ -2,18 +2,25 @@ import React, { Component } from 'react';
 import { Navbar, NavbarBrand } from 'reactstrap';
 import Menu from './components/MenuComponent';
 import './App.css';
-import { DISHES } from './shared/dishes';
+import createDishes from './shared/dishes';
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      dishes: DISHES,
-    };
+
+    // console.log('in App', DISHES);
+    createDishes().then((exportDishes) => {
+      console.log('exportDishes', exportDishes);
+
+      this.state = {
+        dishes: exportDishes,
+      };
+    });
   }
 
   render() {
     const { dishes } = this.state;
+
 
     return (
       <div>

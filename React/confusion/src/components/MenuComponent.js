@@ -32,6 +32,8 @@ class Menu extends Component {
     const { dishes } = this.props;
     const { selectedDish } = this.state;
 
+    console.log(dishes);
+
     const menu = dishes.map(dish => (
       // todo: After finish course refactor to css grid
       <div key={dish.id} className="col-12 col-md-5 m-1">
