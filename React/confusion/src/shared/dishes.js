@@ -56,11 +56,13 @@ async function createDishes() {
     },
   ];
 
-  return dishes.map(async (dish) => {
+  const promises = await dishes.map(async (dish) => {
     const newDish = clone(dish);
     newDish.comments = await createFakeComments();
     return newDish;
   });
+
+  return Promise.all(promises);
 }
 
-export default createDishes;
+export default createDishes();

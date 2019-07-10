@@ -7,31 +7,35 @@ import createDishes from './shared/dishes';
 class App extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      dishes: [],
+    };
+  }
 
-    // console.log('in App', DISHES);
-    createDishes().then((exportDishes) => {
-      console.log('exportDishes', exportDishes);
-
-      this.state = {
-        dishes: exportDishes,
-      };
+  componentDidMount() {
+    createDishes.then((result) => {
+      this.setState({
+        dishes: result,
+      });
     });
   }
 
   render() {
     const { dishes } = this.state;
 
-
-    return (
-      <div>
-        <Navbar dark color="primary">
-          <div className="container">
-            <NavbarBrand href="/">Ristorante Con Fusion</NavbarBrand>
-          </div>
-        </Navbar>
-        <Menu dishes={dishes} />
-      </div>
-    );
+    if (dishes) {
+      return (
+        <div>
+          <Navbar dark color="primary">
+            <div className="container">
+              <NavbarBrand href="/">Ristorante Con Fusion</NavbarBrand>
+            </div>
+          </Navbar>
+          <Menu dishes={dishes} />
+        </div>
+      );
+    }
+    return <div />;
   }
 }
 

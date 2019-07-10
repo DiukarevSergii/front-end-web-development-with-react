@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 class DishDetail extends Component {
     static propTypes = {
-      dish: PropTypes.objectOf(PropTypes.object).isRequired,
+      dish: PropTypes.objectOf(PropTypes.object),
     };
 
     render() {
