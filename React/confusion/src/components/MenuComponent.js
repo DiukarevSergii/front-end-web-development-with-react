@@ -22,7 +22,7 @@ class Menu extends Component {
     this.setState({ selectedDish: dish });
   }
 
-  renderDish(dish) {
+  renderDish(dish = {}) {
     return (
       <DishDetail dish={dish} />
     );
@@ -31,8 +31,6 @@ class Menu extends Component {
   render() {
     const { dishes } = this.props;
     const { selectedDish } = this.state;
-
-    console.log(dishes);
 
     const menu = dishes.map(dish => (
       // todo: After finish course refactor to css grid
