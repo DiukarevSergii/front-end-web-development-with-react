@@ -4,11 +4,34 @@ import {
 } from 'reactstrap';
 import PropTypes from 'prop-types';
 
+/**
+ * DishDetail.
+ *
+ * @param {Object} props - Component props.
+ */
 class DishDetail extends Component {
+    /**
+     * @type {propTypes}
+     * @param {Object} dish - The selected dish
+     */
     static propTypes = {
       dish: PropTypes.objectOf(PropTypes.object),
     };
 
+    /**
+     * @type {defaultProps}
+     * @prop {object} - default dish value.
+     */
+    static defaultProps = {
+      dish: {},
+    };
+
+
+    /**
+     * Render function.
+     *
+     * @returns {Object} A dom element for an element.
+     */
     render() {
       const { dish } = this.props;
 
