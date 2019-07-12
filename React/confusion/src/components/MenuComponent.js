@@ -3,6 +3,7 @@ import {
   Card, CardImg, CardImgOverlay, CardTitle,
 } from 'reactstrap';
 import PropTypes from 'prop-types';
+import { Container, Row, Col } from 'react-bootstrap';
 import DishDetail from './DishDetailComponent';
 
 class Menu extends Component {
@@ -34,23 +35,23 @@ class Menu extends Component {
 
     const menu = dishes.map(dish => (
       // todo: After finish course refactor to css grid
-      <div key={dish.id} className="col-12 col-md-5 m-1">
-        <Card key={dish.id} onClick={() => this.onDishSelect(dish)}>
-          <CardImg width="100%" src={dish.image} alt={dish.name} />
+      <Col key={dish.id} xs={6} md={6}>
+        <Card key={dish.id} className="item"  onClick={() => this.onDishSelect(dish)}>
+          <CardImg src={dish.image} alt={dish.name} />
           <CardImgOverlay>
             <CardTitle>{dish.name}</CardTitle>
           </CardImgOverlay>
         </Card>
-      </div>
+      </Col>
     ));
 
     return (
-      <div className="container">
-        <div className="row">
+      <Container>
+        <Row className="show-item">
           {menu}
-          {this.renderDish(selectedDish)}
-        </div>
-      </div>
+        </Row>
+        {this.renderDish(selectedDish)}
+      </Container>
     );
   }
 }

@@ -3,6 +3,8 @@ import {
   Card, CardImg, CardText, CardBody, CardTitle,
 } from 'reactstrap';
 import PropTypes from 'prop-types';
+import { Row, Col } from 'react-bootstrap';
+import './DishDetailComponent.scss';
 
 /**
  * DishDetail.
@@ -26,6 +28,21 @@ class DishDetail extends Component {
       dish: {},
     };
 
+    renderComments(comments = []) {
+      if (comments.length > 0) {
+        const { author, data, sentence } = comments[0];
+        return (
+          <Card>
+            <CardBody>
+              <h4>Comments</h4>
+              <CardText>{sentence}</CardText>
+              <CardText>{`-- ${author}, ${data}`}</CardText>
+            </CardBody>
+          </Card>
+        );
+      }
+      return '';
+    }
 
     /**
      * Render function.
@@ -36,17 +53,24 @@ class DishDetail extends Component {
       const { dish } = this.props;
 
       if (dish != null) {
-        const { image, name, description } = dish;
+        const {
+          image, name, description, comments,
+        } = dish;
         return (
-          <div className="col-12 col-md-5 m-1">
-            <Card>
-              <CardImg top src={image} alt={name} />
-              <CardBody>
-                <CardTitle>{name}</CardTitle>
-                <CardText>{description}</CardText>
-              </CardBody>
-            </Card>
-          </div>
+          <Row className="show-item">
+            <Col xs={6} md={6}>
+              <Card className="item">
+                <CardImg src={image} alt={name} />
+                <CardBody>
+                  <CardTitle>{name}</CardTitle>
+                  <CardText>{description}</CardText>
+                </CardBody>
+              </Card>
+            </Col>
+            <Col xs={6} md={6}>
+              {this.renderComments(comments)}
+            </Col>
+          </Row>
         );
       }
       return (
