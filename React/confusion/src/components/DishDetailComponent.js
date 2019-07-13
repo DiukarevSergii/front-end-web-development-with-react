@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-  Card, CardImg, CardText, CardBody, CardTitle,
+  Card, CardImg, CardText, CardBody, CardTitle, CardImgOverlay,
 } from 'reactstrap';
 import PropTypes from 'prop-types';
 import { Row, Col } from 'react-bootstrap';
@@ -30,15 +30,28 @@ class DishDetail extends Component {
 
     renderComments(comments = []) {
       if (comments.length > 0) {
-        const { author, data, sentence } = comments[0];
-        return (
-          <Card className="item">
-            <CardBody>
-              <h4>Comments</h4>
+        const selectedDishComments = comments.map((comment) => {
+          const {
+            id, author, data, sentence,
+          } = comment;
+
+          return (
+            <Row key={id}>
               <CardText>{sentence}</CardText>
               <CardText>{`-- ${author}, ${data}`}</CardText>
-            </CardBody>
-          </Card>
+            </Row>
+          );
+        });
+
+        return (
+          <div className="item">
+            <Row>
+              <h4>Comments</h4>
+            </Row>
+            <div>
+              {selectedDishComments}
+            </div>
+          </div>
         );
       }
       return '';

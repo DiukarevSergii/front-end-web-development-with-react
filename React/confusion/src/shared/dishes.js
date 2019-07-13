@@ -6,6 +6,7 @@ function createFakeComments() {
 
   for (let i = 0; i < 4; i += 1) {
     const comment = {};
+    comment.id = i;
     comment.author = faker.name.findName();
     comment.data = faker.date.past();
     comment.sentence = faker.lorem.sentence();
