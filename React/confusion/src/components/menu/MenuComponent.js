@@ -4,7 +4,7 @@ import {
 } from 'reactstrap';
 import PropTypes from 'prop-types';
 import { Container, Row, Col } from 'react-bootstrap';
-import DishDetail from './DishDetailComponent';
+import DishDetail from '../dish-detail/DishDetailComponent';
 
 class Menu extends Component {
   static propTypes = {
