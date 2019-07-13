@@ -1,30 +1,41 @@
 import React, { Component } from 'react';
 import { Navbar, NavbarBrand } from 'reactstrap';
-import Menu from './components/MenuComponent';
+import Menu from './components/menu/MenuComponent';
 import './App.css';
-import { DISHES } from './shared/dishes';
+import createDishes from './shared/dishes';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      dishes: DISHES,
+      dishes: [],
     };
+  }
+
+  componentDidMount() {
+    createDishes.then((result) => {
+      this.setState({
+        dishes: result,
+      });
+    });
   }
 
   render() {
     const { dishes } = this.state;
 
-    return (
-      <div>
-        <Navbar dark color="primary">
-          <div className="container">
-            <NavbarBrand href="/">Ristorante Con Fusion</NavbarBrand>
-          </div>
-        </Navbar>
-        <Menu dishes={dishes} />
-      </div>
-    );
+    if (dishes) {
+      return (
+        <div>
+          <Navbar dark color="primary">
+            <div className="container">
+              <NavbarBrand href="/">Ristorante Con Fusion</NavbarBrand>
+            </div>
+          </Navbar>
+          <Menu dishes={dishes} />
+        </div>
+      );
+    }
+    return <div />;
   }
 }
 
