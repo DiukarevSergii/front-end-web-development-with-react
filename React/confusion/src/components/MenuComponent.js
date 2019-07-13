@@ -36,7 +36,7 @@ class Menu extends Component {
     const menu = dishes.map(dish => (
       // todo: After finish course refactor to css grid
       <Col key={dish.id} xs={6} md={6}>
-        <Card key={dish.id} className="item"  onClick={() => this.onDishSelect(dish)}>
+        <Card key={dish.id} className="item" onClick={() => this.onDishSelect(dish)}>
           <CardImg src={dish.image} alt={dish.name} />
           <CardImgOverlay>
             <CardTitle>{dish.name}</CardTitle>

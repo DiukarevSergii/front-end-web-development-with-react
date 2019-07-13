@@ -32,7 +32,7 @@ class DishDetail extends Component {
       if (comments.length > 0) {
         const { author, data, sentence } = comments[0];
         return (
-          <Card>
+          <Card className="item">
             <CardBody>
               <h4>Comments</h4>
               <CardText>{sentence}</CardText>
