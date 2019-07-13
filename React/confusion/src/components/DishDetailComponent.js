@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-  Card, CardImg, CardText, CardBody, CardTitle, CardImgOverlay,
+  Card, CardImg, CardText, CardBody, CardTitle,
 } from 'reactstrap';
 import PropTypes from 'prop-types';
 import { Row, Col } from 'react-bootstrap';
@@ -44,7 +44,7 @@ class DishDetail extends Component {
         });
 
         return (
-          <div className="item">
+          <div className="comments">
             <Row>
               <h4>Comments</h4>
             </Row>
