@@ -39,6 +39,8 @@ class DishDetail extends Component {
             <Row key={id}>
               <CardText>{sentence}</CardText>
               <CardText>{`-- ${author}, ${data}`}</CardText>
+              <CardText> </CardText>
+              <CardText> </CardText>
             </Row>
           );
         });
