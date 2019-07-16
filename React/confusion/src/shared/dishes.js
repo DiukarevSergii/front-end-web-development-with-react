@@ -8,7 +8,9 @@ function createFakeComments() {
     const comment = {};
     comment.id = i;
     comment.author = faker.name.findName();
-    comment.data = faker.date.past();
+    comment.data = new Intl
+      .DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit' })
+      .format(new Date(Date.parse(faker.date.past())));
     comment.sentence = faker.lorem.sentence();
     comments.push(comment);
   }
