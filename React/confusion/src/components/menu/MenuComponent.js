@@ -3,40 +3,20 @@ import {
   Card, CardImg, CardImgOverlay, CardTitle,
 } from 'reactstrap';
 import PropTypes from 'prop-types';
-import { Container, Row, Col } from 'react-bootstrap';
-import DishDetail from '../dish-detail/DishDetailComponent';
+import { Row, Col } from 'react-bootstrap';
 
 class Menu extends Component {
   static propTypes = {
     dishes: PropTypes.arrayOf(PropTypes.object).isRequired,
+    onClick: PropTypes.func.isRequired,
   };
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      selectedDish: null,
-    };
-  }
-
-  onDishSelect(dish) {
-    this.setState({ selectedDish: dish });
-  }
-
-  renderDish(dish = {}) {
-    return (
-      <DishDetail dish={dish} />
-    );
-  }
-
   render() {
-    const { dishes } = this.props;
-    const { selectedDish } = this.state;
+    const { dishes, onClick } = this.props;
 
     const menu = dishes.map(dish => (
-      // todo: After finish course refactor to css grid
-      <Col key={dish.id} xs={6} md={6}>
-        <Card key={dish.id} className="item" onClick={() => this.onDishSelect(dish)}>
+      <Col xs={6} md={6} key={dish.id}>
+        <Card className="item" key={dish.id} onClick={() => onClick(dish.id)}>
           <CardImg src={dish.image} alt={dish.name} />
           <CardImgOverlay>
             <CardTitle>{dish.name}</CardTitle>
@@ -46,12 +26,9 @@ class Menu extends Component {
     ));
 
     return (
-      <Container>
-        <Row className="show-item">
-          {menu}
-        </Row>
-        {this.renderDish(selectedDish)}
-      </Container>
+      <Row className="show-item">
+        {menu}
+      </Row>
     );
   }
 }

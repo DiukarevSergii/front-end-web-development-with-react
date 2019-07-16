@@ -4,6 +4,7 @@ import {
 } from 'reactstrap';
 import PropTypes from 'prop-types';
 import { Row, Col } from 'react-bootstrap';
+import { isEmpty } from 'lodash';
 import './DishDetailComponent.scss';
 
 /**
@@ -17,7 +18,7 @@ class DishDetail extends Component {
      * @param {Object} dish - The selected dish
      */
     static propTypes = {
-      dish: PropTypes.objectOf(PropTypes.object),
+      dish: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
     };
 
     /**
@@ -46,14 +47,14 @@ class DishDetail extends Component {
         });
 
         return (
-          <div className="comments">
-            <Row>
+          <Col xs={6} md={6}>
+            <Row className="item">
               <h4>Comments</h4>
             </Row>
-            <div>
+            <Row className="item">
               {selectedDishComments}
-            </div>
-          </div>
+            </Row>
+          </Col>
         );
       }
       return '';
@@ -67,13 +68,13 @@ class DishDetail extends Component {
     render() {
       const { dish } = this.props;
 
-      if (dish != null) {
+      if (!isEmpty(dish)) {
         const {
           image, name, description, comments,
         } = dish;
         return (
           <Row className="show-item">
-            <Col xs={6} md={6}>
+            <Col xs={6} md={6} key={dish.id}>
               <Card className="item">
                 <CardImg src={image} alt={name} />
                 <CardBody>
@@ -82,9 +83,7 @@ class DishDetail extends Component {
                 </CardBody>
               </Card>
             </Col>
-            <Col xs={6} md={6}>
-              {this.renderComments(comments)}
-            </Col>
+            {this.renderComments(comments)}
           </Row>
         );
       }
