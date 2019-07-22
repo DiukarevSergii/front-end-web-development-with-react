@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Container } from 'react-bootstrap';
-import Menu from './menu/MenuComponent';
-import DishDetail from './dish-detail/DishDetailComponent';
-import createDishes from '../shared/dishes';
-import Header from './HeaderComponent';
-import Footer from './FooterComponent';
+import Menu from '../menu/MenuComponent';
+import DishDetail from '../dish-detail/DishDetailComponent';
+import createDishes from '../../shared/dishes';
+import Header from '../HeaderComponent';
+import Footer from '../FooterComponent';
 
 class Main extends Component {
   constructor(props) {
