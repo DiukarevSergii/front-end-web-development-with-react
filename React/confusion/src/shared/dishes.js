@@ -26,6 +26,7 @@ async function createDishes() {
       image: 'assets/images/uthappizza.png',
       category: 'mains',
       label: 'Hot',
+      featured: true,
       description: 'A unique combination of Indian Uthappam (pancake) and Italian pizza, topped with Cerignola olives, ripe vine cherry tomatoes, Vidalia onion, Guntur chillies.',
     },
     {
@@ -34,6 +35,7 @@ async function createDishes() {
       image: 'assets/images/zucchipakoda.png',
       category: 'appetizer',
       label: '',
+      featured: false,
       description: 'Deep fried Zucchini coated with mildly spiced Chickpea flour batter accompanied with a sweet-tangy tamarind sauce',
     },
     {
@@ -42,6 +44,7 @@ async function createDishes() {
       image: 'assets/images/vadonut.png',
       category: 'appetizer',
       label: 'New',
+      featured: false,
       description: 'A quintessential ConFusion experience, is it a vada or is it a donut?',
     },
     {
@@ -50,6 +53,7 @@ async function createDishes() {
       image: 'assets/images/elaicheesecake.png',
       category: 'dessert',
       label: '',
+      featured: false,
       description: 'A delectable, semi-sweet New York Style Cheese Cake, with Graham cracker crust and spiced with Indian cardamoms',
     },
   ];
