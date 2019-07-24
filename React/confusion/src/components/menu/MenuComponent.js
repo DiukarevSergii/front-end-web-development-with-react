@@ -1,7 +1,8 @@
 import React from 'react';
 import {
-  Card, CardImg, CardImgOverlay, CardTitle,
+  Card, CardImg, CardImgOverlay, CardTitle, Breadcrumb, BreadcrumbItem,
 } from 'reactstrap';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Row, Col } from 'react-bootstrap';
 
@@ -9,10 +10,12 @@ function RenderMenuItem({ dish }) {
   return (
     <Col xs={6} md={6} key={dish.id}>
       <Card className="item" key={dish.id}>
-        <CardImg src={dish.image} alt={dish.name} />
-        <CardImgOverlay>
-          <CardTitle>{dish.name}</CardTitle>
-        </CardImgOverlay>
+        <Link to={`/menu/${dish.id}`}>
+          <CardImg src={dish.image} alt={dish.name} />
+          <CardImgOverlay>
+            <CardTitle>{dish.name}</CardTitle>
+          </CardImgOverlay>
+        </Link>
       </Card>
     </Col>
   );
@@ -30,9 +33,21 @@ const Menu = (props) => {
   ));
 
   return (
-    <Row className="show-item">
-      {menu}
-    </Row>
+    <div>
+      <div>
+        <Breadcrumb>
+          <BreadcrumbItem><Link to="/home">Home</Link></BreadcrumbItem>
+          <BreadcrumbItem active>Menu</BreadcrumbItem>
+        </Breadcrumb>
+        <Row xs={12} md={12}>
+          <h3>Menu</h3>
+          <hr />
+        </Row>
+      </div>
+      <Row className="show-item">
+        {menu}
+      </Row>
+    </div>
   );
 };
 

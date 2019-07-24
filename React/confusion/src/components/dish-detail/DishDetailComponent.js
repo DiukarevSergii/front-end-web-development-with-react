@@ -1,7 +1,8 @@
 import React from 'react';
 import {
-  Card, CardImg, CardText, CardBody, CardTitle,
+  Card, CardImg, CardText, CardBody, CardTitle, Breadcrumb, BreadcrumbItem,
 } from 'reactstrap';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Row, Col } from 'react-bootstrap';
 import { isEmpty } from 'lodash';
@@ -84,10 +85,22 @@ const DishDetail = (props) => {
   if (!isEmpty(dish)) {
     const { comments } = dish;
     return (
-      <Row className="show-item">
-        <RenderDish dish={dish} />
-        <RenderComments comments={comments} />
-      </Row>
+      <div className="container">
+        <div className="row">
+          <Breadcrumb>
+            <BreadcrumbItem><Link to="/menu">Menu</Link></BreadcrumbItem>
+            <BreadcrumbItem active>{props.dish.name}</BreadcrumbItem>
+          </Breadcrumb>
+          <div className="col-12">
+            <h3>{props.dish.name}</h3>
+            <hr />
+          </div>
+        </div>
+        <Row className="show-item">
+          <RenderDish dish={dish} />
+          <RenderComments comments={comments} />
+        </Row>
+      </div>
     );
   }
   return (

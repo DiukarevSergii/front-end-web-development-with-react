@@ -6,6 +6,8 @@ import Header from '../HeaderComponent';
 import Home from '../HomeComponentt';
 import Footer from '../FooterComponent';
 import Contact from '../ContactComponent';
+import DishDetail from '../dish-detail/DishDetailComponent';
+import { COMMENTS } from '../../shared/comments';
 import { PROMOTIONS } from '../../shared/promotions';
 import { LEADERS } from '../../shared/leaders';
 
@@ -14,6 +16,7 @@ class Main extends Component {
     super(props);
     this.state = {
       dishes: [],
+      comments: COMMENTS,
       promotions: PROMOTIONS,
       leaders: LEADERS,
     };
@@ -28,7 +31,9 @@ class Main extends Component {
   }
 
   render() {
-    const { dishes, promotions, leaders } = this.state;
+    const {
+      dishes, promotions, leaders, comments,
+    } = this.state;
 
     const HomePage = () => (
       <Home
@@ -38,12 +43,20 @@ class Main extends Component {
       />
     );
 
+    const DishWithId = ({ match }) => (
+      <DishDetail
+        dish={dishes.filter(dish => dish.id === parseInt(match.params.dishId, 10))[0]}
+        comments={comments.filter(comment => comment.dishId === parseInt(match.params.dishId, 10))}
+      />
+    );
+
     return (
       <div>
         <Header />
         <Switch>
           <Route path="/home" component={HomePage} />
           <Route exact path="/menu" component={() => <Menu dishes={dishes} />} />
+          <Route path="/menu/:dishId" component={DishWithId} />
           <Route exact path="/contactus" component={Contact} />
           <Redirect to="/home" />
         </Switch>
