@@ -19,7 +19,7 @@ function RenderMenuItem({ dish }) {
 }
 
 RenderMenuItem.propTypes = {
-  dish: PropTypes.arrayOf(PropTypes.object).isRequired,
+  dish: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
 const Menu = (props) => {

@@ -25,20 +25,12 @@ function RenderCard({ item }) {
 }
 
 RenderCard.propTypes = {
-  image: PropTypes.objectOf(PropTypes.object),
-  item: PropTypes.objectOf(PropTypes.object),
-  designation: PropTypes.objectOf(PropTypes.object),
-  name: PropTypes.objectOf(PropTypes.object),
-  description: PropTypes.objectOf(PropTypes.object),
+  item: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
+
 };
 
 RenderCard.defaultProps = {
-  image: {},
   item: {},
-  designation: {},
-  name: {},
-  description: {},
-
 };
 
 function Home(props) {
@@ -70,9 +62,9 @@ function Home(props) {
 }
 
 Home.propTypes = {
-  dish: PropTypes.arrayOf(PropTypes.object),
-  promotion: PropTypes.arrayOf(PropTypes.object).isRequired,
-  leader: PropTypes.arrayOf(PropTypes.object).isRequired,
+  dish: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
+  promotion: PropTypes.oneOfType([PropTypes.object, PropTypes.number]).isRequired,
+  leader: PropTypes.oneOfType([PropTypes.object, PropTypes.number]).isRequired,
 };
 
 Home.defaultProps = {
