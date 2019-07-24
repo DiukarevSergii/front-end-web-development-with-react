@@ -34,10 +34,7 @@ RenderCard.defaultProps = {
 };
 
 function Home(props) {
-  console.log('home props', props);
-
   const { dish, promotion, leader } = props;
-
 
   if (!isEmpty(dish)) {
     return (
