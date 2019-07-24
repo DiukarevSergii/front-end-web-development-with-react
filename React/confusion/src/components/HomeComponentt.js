@@ -5,6 +5,7 @@ import {
 } from 'reactstrap';
 import PropTypes from 'prop-types';
 import { isEmpty } from 'lodash';
+import './HomeComponent.scss';
 
 function RenderCard({ item }) {
   const {
@@ -13,7 +14,7 @@ function RenderCard({ item }) {
 
   return (
     <Card>
-      <CardImg src={image} alt={name} />
+      <CardImg src={image} alt={name} className="home" />
       <CardBody>
         <CardTitle>{name}</CardTitle>
         {designation ? <CardSubtitle>{designation}</CardSubtitle> : null }
