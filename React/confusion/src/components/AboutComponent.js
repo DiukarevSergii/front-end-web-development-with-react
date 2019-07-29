@@ -5,15 +5,37 @@ import {
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import './AboutComponent.scss';
+
+function RenderLeader({ leader }) {
+  const {
+    id, name, image, designation, description,
+  } = leader;
+
+  return (
+  // todo refactor to flex box
+    <div key={id} className="col-12 mt-5">
+      <Media tag="li">
+        <Media left className="col-3 ml-3">
+          <Media object src={image} alt={name} className="leader_image" />
+        </Media>
+        <Media body className="col-9 ml-9">
+          <Media heading>{name}</Media>
+          <p>{designation}</p>
+          <p>{description}</p>
+        </Media>
+      </Media>
+    </div>
+  );
+}
 
 function About(props) {
   let { leaders } = props;
+
   leaders = leaders.map(leader => (
-    <p>
-Leader
-      {leader.name}
-    </p>
+    <RenderLeader leader={leader} />
   ));
+
 
   return (
     <div className="container">
