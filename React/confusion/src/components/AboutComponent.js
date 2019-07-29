@@ -29,6 +29,10 @@ function RenderLeader({ leader }) {
   );
 }
 
+RenderLeader.propTypes = {
+  leader: PropTypes.objectOf(PropTypes.object).isRequired,
+};
+
 function About(props) {
   let { leaders } = props;
 
