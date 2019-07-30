@@ -18,6 +18,7 @@
     ],
     "rules": {
         "react/prefer-stateless-function": 0,
+        "max-len": [2, 180, 4, {"ignoreUrls": true}],
         "react/jsx-filename-extension": [1, { "extensions": [".js"] }]
     }
 }

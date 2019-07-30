@@ -1,59 +1,57 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
-  Card, CardImg, CardImgOverlay, CardTitle,
+  Card, CardImg, CardImgOverlay, CardTitle, Breadcrumb, BreadcrumbItem,
 } from 'reactstrap';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { Container, Row, Col } from 'react-bootstrap';
-import DishDetail from '../dish-detail/DishDetailComponent';
+import { Row, Col } from 'react-bootstrap';
 
-class Menu extends Component {
-  static propTypes = {
-    dishes: PropTypes.arrayOf(PropTypes.object).isRequired,
-  };
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      selectedDish: null,
-    };
-  }
-
-  onDishSelect(dish) {
-    this.setState({ selectedDish: dish });
-  }
-
-  renderDish(dish = {}) {
-    return (
-      <DishDetail dish={dish} />
-    );
-  }
-
-  render() {
-    const { dishes } = this.props;
-    const { selectedDish } = this.state;
-
-    const menu = dishes.map(dish => (
-      // todo: After finish course refactor to css grid
-      <Col key={dish.id} xs={6} md={6}>
-        <Card key={dish.id} className="item" onClick={() => this.onDishSelect(dish)}>
+function RenderMenuItem({ dish }) {
+  return (
+    <Col xs={6} md={6} key={dish.id}>
+      <Card className="item" key={dish.id}>
+        <Link to={`/menu/${dish.id}`}>
           <CardImg src={dish.image} alt={dish.name} />
           <CardImgOverlay>
             <CardTitle>{dish.name}</CardTitle>
           </CardImgOverlay>
-        </Card>
-      </Col>
-    ));
-
-    return (
-      <Container>
-        <Row className="show-item">
-          {menu}
-        </Row>
-        {this.renderDish(selectedDish)}
-      </Container>
-    );
-  }
+        </Link>
+      </Card>
+    </Col>
+  );
 }
+
+RenderMenuItem.propTypes = {
+  dish: PropTypes.objectOf(PropTypes.object).isRequired,
+};
+
+const Menu = (props) => {
+  const { dishes } = props;
+
+  const menu = dishes.map(dish => (
+    <RenderMenuItem dish={dish} />
+  ));
+
+  return (
+    <div>
+      <div>
+        <Breadcrumb>
+          <BreadcrumbItem><Link to="/home">Home</Link></BreadcrumbItem>
+          <BreadcrumbItem active>Menu</BreadcrumbItem>
+        </Breadcrumb>
+        <Row xs={12} md={12}>
+          <h3>Menu</h3>
+          <hr />
+        </Row>
+      </div>
+      <Row className="show-item">
+        {menu}
+      </Row>
+    </div>
+  );
+};
+
+Menu.propTypes = { dishes: PropTypes.arrayOf(PropTypes.object).isRequired };
+
 
 export default Menu;
