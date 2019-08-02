@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import {
+  Switch, Route, Redirect, withRouter,
+} from 'react-router-dom';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import Menu from '../menu/MenuComponent';
 import createDishes from '../../shared/dishes';
 import Header from '../HeaderComponent';
@@ -8,18 +12,19 @@ import Footer from '../FooterComponent';
 import About from '../AboutComponent';
 import Contact from '../ContactComponent';
 import DishDetail from '../dish-detail/DishDetailComponent';
-import { COMMENTS } from '../../shared/comments';
-import { PROMOTIONS } from '../../shared/promotions';
-import { LEADERS } from '../../shared/leaders';
+
+const mapStateToProps = state => ({
+  dishes: state.dishes,
+  comments: state.comments,
+  promotions: state.promotions,
+  leaders: state.leaders,
+});
 
 class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {
       dishes: [],
-      comments: COMMENTS,
-      promotions: PROMOTIONS,
-      leaders: LEADERS,
     };
   }
 
@@ -33,8 +38,10 @@ class Main extends Component {
 
   render() {
     const {
-      dishes, promotions, leaders, comments,
-    } = this.state;
+      promotions, leaders, comments,
+    } = this.props;
+
+    const { dishes } = this.state;
 
     const HomePage = () => (
       <Home
@@ -68,4 +75,10 @@ class Main extends Component {
   }
 }
 
-export default Main;
+Main.propTypes = {
+  promotions: PropTypes.objectOf(PropTypes.object).isRequired,
+  leaders: PropTypes.objectOf(PropTypes.object).isRequired,
+  comments: PropTypes.objectOf(PropTypes.object).isRequired,
+};
+
+export default withRouter(connect(mapStateToProps)(Main));
