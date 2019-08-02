@@ -1,10 +1,10 @@
 import React from 'react';
 import {
-  Card, CardImg, CardImgOverlay, CardTitle, Breadcrumb, BreadcrumbItem,
+  Card, CardImg, CardImgOverlay, CardTitle, Breadcrumb, BreadcrumbItem, Row, Col,
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { Row, Col } from 'react-bootstrap';
+import './MenuComponent.scss';
 
 function RenderMenuItem({ dish }) {
   return (
@@ -39,7 +39,7 @@ const Menu = (props) => {
           <BreadcrumbItem><Link to="/home">Home</Link></BreadcrumbItem>
           <BreadcrumbItem active>Menu</BreadcrumbItem>
         </Breadcrumb>
-        <Row xs={12} md={12}>
+        <Row xs={12} md={12} className="menu">
           <h3>Menu</h3>
           <hr />
         </Row>
