@@ -43,7 +43,7 @@ class Header extends Component {
   render() {
     const { isNavOpen, isModalOpen } = this.state;
     return (
-      <React.Fragment>
+      <div>
         <Navbar dark expand="md">
           <div className="container">
             <NavbarToggler onClick={this.toggleNav} />
@@ -139,7 +139,7 @@ Login
             </Form>
           </ModalBody>
         </Modal>
-      </React.Fragment>
+      </div>
     );
   }
 }
