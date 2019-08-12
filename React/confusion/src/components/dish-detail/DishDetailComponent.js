@@ -32,11 +32,17 @@ class CommentForm extends Component {
     this.setState({
       isModalOpen: !isModalOpen,
     });
-  }
+  };
 
   handleSubmit = (values) => {
     console.log(`Current State is: ${JSON.stringify(values)}`);
-    alert(`Current State is: ${JSON.stringify(values)}`);
+    this.toggleModal();
+    const { addComment, dishId } = this.props;
+    const { rating, author, comment } = values;
+    addComment(dishId, rating, author, comment);
+    // todo комментарии должны отбражаться из redux-state
+    // todo комментарии должны хранится только в redux-state
+    // todo их следует туда записывать при создании при помощи метода addComment
   };
 
   render() {
@@ -121,9 +127,14 @@ class CommentForm extends Component {
   }
 }
 
+CommentForm.propTypes = {
+  dishId: PropTypes.number.isRequired,
+  addComment: PropTypes.func.isRequired,
+};
+
 class RenderComments extends Component {
   render() {
-    const { comments } = this.props;
+    const { comments, addComment, dishId } = this.props;
 
     if (comments.length > 0) {
       const selectedDishComments = comments.map((comment) => {
@@ -150,7 +161,7 @@ class RenderComments extends Component {
             {selectedDishComments}
           </Row>
           <Row className="item">
-            <CommentForm />
+            <CommentForm dishId={dishId} addComment={addComment} />
           </Row>
         </Col>
       );
@@ -161,6 +172,8 @@ class RenderComments extends Component {
 
 RenderComments.propTypes = {
   comments: PropTypes.arrayOf(PropTypes.object).isRequired,
+  addComment: PropTypes.func.isRequired,
+  dishId: PropTypes.number.isRequired,
 };
 
 /**
@@ -200,10 +213,15 @@ RenderDish.defaultProps = {
      * @returns {Object} A dom element for an element.
      */
 const DishDetail = (props) => {
-  const { dish } = props;
+  const {
+    dish,
+    addComment,
+  } = props;
+
+  console.log(addComment);
 
   if (!isEmpty(dish)) {
-    const { comments } = dish;
+    const { comments, id } = dish;
     return (
       <div className="container">
         <div className="row">
@@ -218,7 +236,7 @@ const DishDetail = (props) => {
         </div>
         <Row className="show-item">
           <RenderDish dish={dish} />
-          <RenderComments comments={comments} />
+          <RenderComments comments={comments} addComment={addComment} dishId={id} />
         </Row>
       </div>
     );
@@ -230,6 +248,7 @@ const DishDetail = (props) => {
 
 DishDetail.propTypes = {
   dish: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
+  addComment: PropTypes.func.isRequired,
 };
 
 /**

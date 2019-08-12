@@ -12,12 +12,18 @@ import Footer from '../FooterComponent';
 import About from '../AboutComponent';
 import Contact from '../ContactComponent';
 import DishDetail from '../dish-detail/DishDetailComponent';
+import { addComment } from '../../redux/ActionCreators';
 
 const mapStateToProps = state => ({
   dishes: state.dishes,
   comments: state.comments,
   promotions: state.promotions,
   leaders: state.leaders,
+});
+
+const mapDispatchToProps = dispatch => ({
+  addComment: (dishId, rating, author, comment) => dispatch(addComment(dishId, rating, author, comment)),
+
 });
 
 class Main extends Component {
@@ -38,7 +44,10 @@ class Main extends Component {
 
   render() {
     const {
-      promotions, leaders, comments,
+      promotions,
+      leaders,
+      comments,
+      addComment, // eslint-disable-line
     } = this.props;
 
     const { dishes } = this.state;
@@ -55,6 +64,7 @@ class Main extends Component {
       <DishDetail
         dish={dishes.filter(dish => dish.id === parseInt(match.params.dishId, 10))[0]}
         comments={comments.filter(comment => comment.dishId === parseInt(match.params.dishId, 10))}
+        addComment={addComment}
       />
     );
 
@@ -76,9 +86,10 @@ class Main extends Component {
 }
 
 Main.propTypes = {
-  promotions: PropTypes.objectOf(PropTypes.object).isRequired,
-  leaders: PropTypes.objectOf(PropTypes.object).isRequired,
-  comments: PropTypes.objectOf(PropTypes.object).isRequired,
+  promotions: PropTypes.arrayOf(PropTypes.object).isRequired,
+  leaders: PropTypes.arrayOf(PropTypes.object).isRequired,
+  comments: PropTypes.arrayOf(PropTypes.object).isRequired,
+  addComment: PropTypes.func.isRequired,
 };
 
-export default withRouter(connect(mapStateToProps)(Main));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Main));
