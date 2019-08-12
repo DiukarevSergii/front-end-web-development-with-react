@@ -1,12 +1,16 @@
 import faker from 'faker';
 import { clone } from 'lodash';
 
-function createFakeComments() {
+function createFakeComments(dishId) {
   const comments = [];
+  let id = 0;
 
-  for (let i = 0; i < 4; i += 1) {
+  for (let i = 0; i < 4; i += 1, id += 1) {
     const comment = {};
-    comment.id = i;
+    comment.id = id;
+    comment.dishId = dishId;
+    // fixme rating
+    comment.rating = 1;
     comment.author = faker.name.findName();
     comment.data = new Intl
       .DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit' })
@@ -60,7 +64,7 @@ async function createDishes() {
 
   const promises = await dishes.map(async (dish) => {
     const newDish = clone(dish);
-    newDish.comments = await createFakeComments();
+    newDish.comments = await createFakeComments(newDish.id);
     newDish.price = String(Math.random() * (100 - 1 + 1) + 1).substring(0, 5);
     return newDish;
   });

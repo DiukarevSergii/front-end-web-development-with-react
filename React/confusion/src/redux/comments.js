@@ -1,15 +1,14 @@
-import { COMMENTS } from '../shared/comments';
+// import { COMMENTS } from '../shared/comments';
 import * as ActionTypes from './ActionTypes';
 
-export const Comments = (state = COMMENTS, action) => { //eslint-disable-line
-  console.log('current comments:', state);
+export const Comments = (state = [], action) => { //eslint-disable-line
 
   switch (action.type) {
     case ActionTypes.ADD_COMMENT: {
       const comment = action.payload;
       comment.id = state.length;
       comment.date = new Date().toISOString();
-      console.log('Comment: ', comment);
+      // console.log('Comment: ', comment);
       return state.concat(comment);
     }
     default:

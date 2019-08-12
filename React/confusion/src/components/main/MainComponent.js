@@ -22,7 +22,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  addComment: (dishId, rating, author, comment) => dispatch(addComment(dishId, rating, author, comment)),
+  addComment: (dishId, rating, author, sentence) => dispatch(addComment(dishId, rating, author, sentence)),
 
 });
 
@@ -35,9 +35,22 @@ class Main extends Component {
   }
 
   componentDidMount() {
-    createDishes.then((result) => {
+    const { addComment } = this.props; // eslint-disable-line
+
+    createDishes.then((dishArray) => {
+      dishArray.forEach((dishItem) => {
+        const { comments } = dishItem;
+        comments.forEach((commentItem) => {
+          const {
+            dishId, rating, author, sentence,
+          } = commentItem;
+
+          addComment(dishId, rating, author, sentence);
+        });
+      });
+
       this.setState({
-        dishes: result,
+        dishes: dishArray,
       });
     });
   }
@@ -47,7 +60,7 @@ class Main extends Component {
       promotions,
       leaders,
       comments,
-      addComment, // eslint-disable-line
+      addComment, // eslint-disable-line no-shadow
     } = this.props;
 
     const { dishes } = this.state;
@@ -63,7 +76,7 @@ class Main extends Component {
     const DishWithId = ({ match }) => (
       <DishDetail
         dish={dishes.filter(dish => dish.id === parseInt(match.params.dishId, 10))[0]}
-        comments={comments.filter(comment => comment.dishId === parseInt(match.params.dishId, 10))}
+        comments={comments ? comments.filter(comment => comment.dishId === parseInt(match.params.dishId, 10)) : []}
         addComment={addComment}
       />
     );
@@ -88,8 +101,12 @@ class Main extends Component {
 Main.propTypes = {
   promotions: PropTypes.arrayOf(PropTypes.object).isRequired,
   leaders: PropTypes.arrayOf(PropTypes.object).isRequired,
-  comments: PropTypes.arrayOf(PropTypes.object).isRequired,
+  comments: PropTypes.arrayOf(PropTypes.object),
   addComment: PropTypes.func.isRequired,
+};
+
+Main.defaultProps = {
+  comments: [],
 };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Main));

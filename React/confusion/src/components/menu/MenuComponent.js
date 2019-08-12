@@ -22,7 +22,11 @@ function RenderMenuItem({ dish }) {
 }
 
 RenderMenuItem.propTypes = {
-  dish: PropTypes.objectOf(PropTypes.object).isRequired,
+  dish: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
+};
+
+RenderMenuItem.defaultProps = {
+  dish: {},
 };
 
 const Menu = (props) => {

@@ -38,11 +38,10 @@ class CommentForm extends Component {
     console.log(`Current State is: ${JSON.stringify(values)}`);
     this.toggleModal();
     const { addComment, dishId } = this.props;
-    const { rating, author, comment } = values;
-    addComment(dishId, rating, author, comment);
-    // todo комментарии должны отбражаться из redux-state
-    // todo комментарии должны хранится только в redux-state
-    // todo их следует туда записывать при создании при помощи метода addComment
+    const { rating, author, sentence } = values;
+
+    // fixme
+    addComment(dishId, rating, author, sentence);
   };
 
   render() {
@@ -216,12 +215,11 @@ const DishDetail = (props) => {
   const {
     dish,
     addComment,
+    comments,
   } = props;
 
-  console.log(addComment);
-
   if (!isEmpty(dish)) {
-    const { comments, id } = dish;
+    const { id } = dish;
     return (
       <div className="container">
         <div className="row">
@@ -249,6 +247,7 @@ const DishDetail = (props) => {
 DishDetail.propTypes = {
   dish: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
   addComment: PropTypes.func.isRequired,
+  comments: PropTypes.arrayOf(PropTypes.object),
 };
 
 /**
@@ -257,6 +256,7 @@ DishDetail.propTypes = {
  */
 DishDetail.defaultProps = {
   dish: {},
+  comments: [],
 };
 
 export default DishDetail;
