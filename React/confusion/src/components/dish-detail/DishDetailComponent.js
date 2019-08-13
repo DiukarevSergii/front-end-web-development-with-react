@@ -84,9 +84,9 @@ class CommentForm extends Component {
                 <Label htmlFor="Your Name" md={12}>Your Name</Label>
                 <Col md={12}>
                   <Control.text
-                    model=".yourname"
-                    id="yourname"
-                    name="yourname"
+                    model=".author"
+                    id="author"
+                    name="author"
                     placeholder="Your Name"
                     className="form-control"
                     validators={{
@@ -95,7 +95,7 @@ class CommentForm extends Component {
                   />
                   <Errors
                     className="text-danger"
-                    model=".yourname"
+                    model=".author"
                     show="touched"
                     messages={{
                       required: 'Required',
@@ -109,9 +109,9 @@ class CommentForm extends Component {
                 <Label htmlFor="message" md={12}>Comment</Label>
                 <Col md={12}>
                   <Control.textarea
-                    model=".comment"
-                    id="comment"
-                    name="comment"
+                    model=".sentence"
+                    id="sentence"
+                    name="sentence"
                     rows="12"
                     className="form-control"
                   />
@@ -138,13 +138,15 @@ class RenderComments extends Component {
     if (comments.length > 0) {
       const selectedDishComments = comments.map((comment) => {
         const {
-          id, author, data, sentence,
+          id, author, date, sentence,
         } = comment;
+
+        console.log(comment);
 
         return (
           <Row key={id}>
             <CardText>{sentence}</CardText>
-            <CardText>{`-- ${author}, ${data}`}</CardText>
+            <CardText>{`-- ${author}, ${date}`}</CardText>
             <CardText> </CardText>
             <CardText> </CardText>
           </Row>
