@@ -12,7 +12,7 @@ import Footer from '../FooterComponent';
 import About from '../AboutComponent';
 import Contact from '../ContactComponent';
 import DishDetail from '../dish-detail/DishDetailComponent';
-import { addComment } from '../../redux/ActionCreators';
+import { addComment, addDish } from '../../redux/ActionCreators';
 
 const mapStateToProps = state => ({
   dishes: state.dishes,
@@ -23,22 +23,26 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   addComment: (dishId, rating, author, sentence) => dispatch(addComment(dishId, rating, author, sentence)),
+  addDish: (category, description, featured, id, image, label, name, price) => dispatch(addDish(category, description, featured, id, image, label, name, price)),
 
 });
 
 class Main extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      dishes: [],
-    };
-  }
 
   componentDidMount() {
-    const { addComment } = this.props; // eslint-disable-line
+    const { addComment, addDish } = this.props; // eslint-disable-line
 
     createDishes.then((dishArray) => {
       dishArray.forEach((dishItem) => {
+        const dish = { ...dishItem };
+        delete dish.comments;
+
+        const {
+          category, description, featured, id, image, label, name, price,
+        } = dish;
+
+        addDish(category, description, featured, id, image, label, name, price);
+
         const { comments } = dishItem;
         comments.forEach((commentItem) => {
           const {
@@ -48,10 +52,6 @@ class Main extends Component {
           addComment(dishId, rating, author, sentence);
         });
       });
-
-      this.setState({
-        dishes: dishArray,
-      });
     });
   }
 
@@ -60,10 +60,9 @@ class Main extends Component {
       promotions,
       leaders,
       comments,
+      dishes,
       addComment, // eslint-disable-line no-shadow
     } = this.props;
-
-    const { dishes } = this.state;
 
     const HomePage = () => (
       <Home
@@ -102,11 +101,14 @@ Main.propTypes = {
   promotions: PropTypes.arrayOf(PropTypes.object).isRequired,
   leaders: PropTypes.arrayOf(PropTypes.object).isRequired,
   comments: PropTypes.arrayOf(PropTypes.object),
+  dishes: PropTypes.arrayOf(PropTypes.object),
   addComment: PropTypes.func.isRequired,
+  addDish: PropTypes.func.isRequired,
 };
 
 Main.defaultProps = {
   comments: [],
+  dishes: [],
 };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Main));

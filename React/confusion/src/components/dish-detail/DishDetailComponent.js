@@ -40,7 +40,6 @@ class CommentForm extends Component {
     const { addComment, dishId } = this.props;
     const { rating, author, sentence } = values;
 
-    // fixme
     addComment(dishId, rating, author, sentence);
   };
 
