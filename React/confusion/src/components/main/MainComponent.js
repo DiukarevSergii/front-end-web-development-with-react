@@ -5,14 +5,14 @@ import {
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Menu from '../menu/MenuComponent';
-import createDishes from '../../shared/dishes';
+// import createDishes from '../../shared/dishes';
 import Header from '../HeaderComponent';
 import Home from '../HomeComponentt';
 import Footer from '../FooterComponent';
 import About from '../AboutComponent';
 import Contact from '../ContactComponent';
 import DishDetail from '../dish-detail/DishDetailComponent';
-import { addComment, addDish } from '../../redux/ActionCreators';
+import { addComment, fetchDishesAndComments } from '../../redux/ActionCreators';
 
 const mapStateToProps = state => ({
   dishes: state.dishes,
@@ -23,36 +23,13 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   addComment: (dishId, rating, author, sentence) => dispatch(addComment(dishId, rating, author, sentence)),
-  addDish: (category, description, featured, id, image, label, name, price) => dispatch(addDish(category, description, featured, id, image, label, name, price)),
-
+  fetchDishesAndComments: () => { dispatch(fetchDishesAndComments()); },
 });
 
 class Main extends Component {
-
   componentDidMount() {
-    const { addComment, addDish } = this.props; // eslint-disable-line
-
-    createDishes.then((dishArray) => {
-      dishArray.forEach((dishItem) => {
-        const dish = { ...dishItem };
-        delete dish.comments;
-
-        const {
-          category, description, featured, id, image, label, name, price,
-        } = dish;
-
-        addDish(category, description, featured, id, image, label, name, price);
-
-        const { comments } = dishItem;
-        comments.forEach((commentItem) => {
-          const {
-            dishId, rating, author, sentence,
-          } = commentItem;
-
-          addComment(dishId, rating, author, sentence);
-        });
-      });
-    });
+    const { fetchDishesAndComments } = this.props; // eslint-disable-line
+    fetchDishesAndComments();
   }
 
   render() {
@@ -63,6 +40,8 @@ class Main extends Component {
       dishes,
       addComment, // eslint-disable-line no-shadow
     } = this.props;
+
+    console.log('dishes from redux thunk', dishes);
 
     const HomePage = () => (
       <Home
@@ -103,7 +82,7 @@ Main.propTypes = {
   comments: PropTypes.arrayOf(PropTypes.object),
   dishes: PropTypes.arrayOf(PropTypes.object),
   addComment: PropTypes.func.isRequired,
-  addDish: PropTypes.func.isRequired,
+  fetchDishesAndComments: PropTypes.func.isRequired,
 };
 
 Main.defaultProps = {
