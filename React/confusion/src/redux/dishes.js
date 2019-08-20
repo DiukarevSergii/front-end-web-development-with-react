@@ -3,17 +3,17 @@ import * as ActionTypes from './ActionTypes';
 export const Dishes = (state = { //eslint-disable-line
   isLoading: true,
   errMess: null,
-  dishes: [],
+  dishesList: [],
 }, action) => {
   switch (action.type) {
     case ActionTypes.ADD_DISHES:
       return {
-        ...state, isLoading: false, errMess: null, dishes: action.payload,
+        ...state, isLoading: false, errMess: null, dishesList: action.payload,
       };
 
     case ActionTypes.DISHES_LOADING:
       return {
-        ...state, isLoading: true, errMess: null, dishes: [],
+        ...state, isLoading: true, errMess: null, dishesList: [],
       };
 
     case ActionTypes.DISHES_FAILED:

@@ -12,7 +12,7 @@ function createFakeComments(dishId) {
     // fixme rating
     comment.rating = 1;
     comment.author = faker.name.findName();
-    comment.data = new Intl
+    comment.date = new Intl
       .DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit' })
       .format(new Date(Date.parse(faker.date.past())));
     comment.sentence = faker.lorem.sentence();
