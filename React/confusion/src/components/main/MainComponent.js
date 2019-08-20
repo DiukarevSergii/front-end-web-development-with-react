@@ -5,7 +5,6 @@ import {
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Menu from '../menu/MenuComponent';
-// import createDishes from '../../shared/dishes';
 import Header from '../HeaderComponent';
 import Home from '../HomeComponentt';
 import Footer from '../FooterComponent';
@@ -28,8 +27,7 @@ const mapDispatchToProps = dispatch => ({
 
 class Main extends Component {
   componentDidMount() {
-    const { fetchDishesAndComments } = this.props; // eslint-disable-line
-    fetchDishesAndComments();
+    this.props.fetchDishesAndComments(); // eslint-disable-line
   }
 
   render() {
@@ -41,11 +39,9 @@ class Main extends Component {
       addComment, // eslint-disable-line no-shadow
     } = this.props;
 
-    console.log('dishes from redux thunk', dishes);
-
     const HomePage = () => (
       <Home
-        dish={dishes.filter(dish => dish.featured)[0]}
+        dish={dishes.dishesList.filter(dish => dish.featured)[0]}
         promotion={promotions.filter(promo => promo.featured)[0]}
         leader={leaders.filter(leader => leader.featured)[0]}
       />
@@ -53,8 +49,8 @@ class Main extends Component {
 
     const DishWithId = ({ match }) => (
       <DishDetail
-        dish={dishes.filter(dish => dish.id === parseInt(match.params.dishId, 10))[0]}
-        comments={comments ? comments.filter(comment => comment.dishId === parseInt(match.params.dishId, 10)) : []}
+        dish={dishes.dishesList.filter(dish => dish.id === parseInt(match.params.dishId, 10))[0]}
+        comments={comments.commentsList ? comments.commentsList.filter(comment => comment.dishId === parseInt(match.params.dishId, 10)) : []}
         addComment={addComment}
       />
     );
@@ -64,7 +60,7 @@ class Main extends Component {
         <Header />
         <Switch>
           <Route path="/home" component={HomePage} />
-          <Route exact path="/menu" component={() => <Menu dishes={dishes} />} />
+          <Route exact path="/menu" component={() => <Menu dishes={dishes.dishesList} />} />
           <Route path="/menu/:dishId" component={DishWithId} />
           <Route exact path="/contactus" component={Contact} />
           <Route exact path="/aboutus" component={() => <About leaders={leaders} />} />
@@ -79,15 +75,15 @@ class Main extends Component {
 Main.propTypes = {
   promotions: PropTypes.arrayOf(PropTypes.object).isRequired,
   leaders: PropTypes.arrayOf(PropTypes.object).isRequired,
-  comments: PropTypes.arrayOf(PropTypes.object),
-  dishes: PropTypes.arrayOf(PropTypes.object),
+  comments: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
+  dishes: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   addComment: PropTypes.func.isRequired,
   fetchDishesAndComments: PropTypes.func.isRequired,
 };
 
 Main.defaultProps = {
-  comments: [],
-  dishes: [],
+  comments: {},
+  dishes: {},
 };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Main));

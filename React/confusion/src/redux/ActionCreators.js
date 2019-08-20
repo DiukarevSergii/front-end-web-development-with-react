@@ -14,10 +14,10 @@ export const addComment = (dishId, rating, author, sentence) => ({ // eslint-dis
 export const addDish = (category, description, featured, id, image, label, name, price) => ({ // eslint-disable-line import/prefer-default-export
   type: ActionTypes.ADD_DISH,
   payload: {
+    id,
     category,
     description,
     featured,
-    id,
     image,
     label,
     name,
@@ -67,11 +67,11 @@ export const fetchDishesAndComments = () => (dispatch) => {
       const { comments } = dishItem;
       comments.forEach((commentItem) => {
         const {
-          dishId, rating, author, sentence,
+          dishId, rating, author, sentence, date,
         } = commentItem;
 
         dishesComments.push({
-          dishId, rating, author, sentence,
+          id: dishesComments.length, dishId, rating, author, sentence, date,
         });
       });
     });
