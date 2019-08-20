@@ -140,8 +140,6 @@ class RenderComments extends Component {
           id, author, date, sentence,
         } = comment;
 
-        console.log(comment);
-
         return (
           <Row key={id}>
             <CardText>{sentence}</CardText>
@@ -208,10 +206,10 @@ RenderDish.defaultProps = {
 };
 
 /**
-     * Render function.
-     *
-     * @returns {Object} A dom element for an element.
-     */
+ * Render function.
+ *
+ * @returns {Object} A dom element for an element.
+ */
 const DishDetail = (props) => {
   const {
     dish,
