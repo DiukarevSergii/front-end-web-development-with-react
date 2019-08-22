@@ -7,13 +7,12 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './AboutComponent.scss';
 
-function RenderLeader({ leader }) {
+const RenderLeader = ({ leader }) => {
   const {
     id, name, image, designation, description,
   } = leader;
 
   return (
-  // todo refactor to flex box
     <div key={id} className="col-12 mt-5">
       <Media tag="li">
         <Media left className="col-3 ml-3">
@@ -27,17 +26,17 @@ function RenderLeader({ leader }) {
       </Media>
     </div>
   );
-}
+};
 
 RenderLeader.propTypes = {
-  leader: PropTypes.objectOf(PropTypes.object).isRequired,
+  leader: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.bool])).isRequired,
 };
 
 function About(props) {
   let { leaders } = props;
 
   leaders = leaders.map(leader => (
-    <RenderLeader leader={leader} />
+    <RenderLeader key={leader.id} leader={leader} />
   ));
 
 
@@ -117,7 +116,7 @@ The Wit and Wisdom of Yogi Berra,
 }
 
 About.propTypes = {
-  leaders: PropTypes.oneOfType([PropTypes.object, PropTypes.number]).isRequired,
+  leaders: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default About;
