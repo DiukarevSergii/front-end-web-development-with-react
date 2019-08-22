@@ -4,6 +4,7 @@ import {
 } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { actions } from 'react-redux-form';
 import Menu from '../menu/MenuComponent';
 import Header from '../HeaderComponent';
 import Home from '../HomeComponentt';
@@ -23,6 +24,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   addComment: (dishId, rating, author, sentence) => dispatch(addComment(dishId, rating, author, sentence)),
   fetchDishesAndComments: () => { dispatch(fetchDishesAndComments()); },
+  resetFeedbackForm: () => { dispatch(actions.reset('feedback'))},
 });
 
 class Main extends Component {
@@ -37,6 +39,7 @@ class Main extends Component {
       comments,
       dishes,
       addComment, // eslint-disable-line no-shadow
+      resetFeedbackForm,
     } = this.props;
 
     const HomePage = () => (
@@ -66,7 +69,7 @@ class Main extends Component {
           <Route path="/home" component={HomePage} />
           <Route exact path="/menu" component={() => <Menu dishes={dishes} />} />
           <Route path="/menu/:dishId" component={DishWithId} />
-          <Route exact path="/contactus" component={Contact} />
+          <Route exact path="/contactus" component={() => <Contact resetFeedbackForm={resetFeedbackForm} />} />
           <Route exact path="/aboutus" component={() => <About leaders={leaders} />} />
           <Redirect to="/ " />
         </Switch>
@@ -83,6 +86,7 @@ Main.propTypes = {
   dishes: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   addComment: PropTypes.func.isRequired,
   fetchDishesAndComments: PropTypes.func.isRequired,
+  resetFeedbackForm: PropTypes.func.isRequired,
 };
 
 Main.defaultProps = {
