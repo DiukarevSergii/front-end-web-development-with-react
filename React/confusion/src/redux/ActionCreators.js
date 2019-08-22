@@ -80,5 +80,5 @@ export const fetchDishesAndComments = () => (dispatch) => {
   setTimeout(() => {
     dispatch(addDishes(dishes));
     dispatch(addComments(dishesComments));
-  }, 2000);
+  }, 5000);
 };

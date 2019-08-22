@@ -42,6 +42,8 @@ class Main extends Component {
     const HomePage = () => (
       <Home
         dish={dishes.dishesList.filter(dish => dish.featured)[0]}
+        dishesLoading={dishes.isLoading}
+        dishesErrMess={dishes.errMess}
         promotion={promotions.filter(promo => promo.featured)[0]}
         leader={leaders.filter(leader => leader.featured)[0]}
       />
@@ -50,6 +52,8 @@ class Main extends Component {
     const DishWithId = ({ match }) => (
       <DishDetail
         dish={dishes.dishesList.filter(dish => dish.id === parseInt(match.params.dishId, 10))[0]}
+        isLoading={dishes.isLoading}
+        errMess={dishes.errMess}
         comments={comments.commentsList ? comments.commentsList.filter(comment => comment.dishId === parseInt(match.params.dishId, 10)) : []}
         addComment={addComment}
       />
@@ -60,7 +64,7 @@ class Main extends Component {
         <Header />
         <Switch>
           <Route path="/home" component={HomePage} />
-          <Route exact path="/menu" component={() => <Menu dishes={dishes.dishesList} />} />
+          <Route exact path="/menu" component={() => <Menu dishes={dishes} />} />
           <Route path="/menu/:dishId" component={DishWithId} />
           <Route exact path="/contactus" component={Contact} />
           <Route exact path="/aboutus" component={() => <About leaders={leaders} />} />

@@ -5,8 +5,11 @@ import {
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './MenuComponent.scss';
+import { Loading } from '../LoadingComponent';
 
 function RenderMenuItem({ dish }) {
+  // console.log('dish', dish);
+
   return (
     <Col xs={6} md={6} key={dish.id}>
       <Card className="item" key={dish.id}>
@@ -32,9 +35,33 @@ RenderMenuItem.defaultProps = {
 const Menu = (props) => {
   const { dishes } = props;
 
-  const menu = dishes.map(dish => (
-    <RenderMenuItem dish={dish} />
-  ));
+  if (dishes.isLoading) {
+    return (
+      <div className="container">
+        <div className="row">
+          <Loading />
+        </div>
+      </div>
+    );
+  }
+
+  const menu = dishes.dishesList.map((dish) => {
+    if (dishes.errMess) {
+      return (
+        <div className="container">
+          <div className="row">
+            <div className="col-12">
+              <h4>{dishes.errMess}</h4>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    return (
+      <RenderMenuItem key={dish.id} dish={dish} />
+    );
+  });
 
   return (
     <div>
@@ -55,7 +82,9 @@ const Menu = (props) => {
   );
 };
 
-Menu.propTypes = { dishes: PropTypes.arrayOf(PropTypes.object).isRequired };
+Menu.propTypes = {
+  dishes: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]).isRequired,
+};
 
 
 export default Menu;

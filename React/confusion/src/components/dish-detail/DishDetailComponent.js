@@ -14,6 +14,7 @@ import { Row, Col } from 'react-bootstrap';
 import { isEmpty } from 'lodash';
 import './DishDetailComponent.scss';
 import { Control, Errors, LocalForm } from 'react-redux-form';
+import { Loading } from '../LoadingComponent';
 
 class CommentForm extends Component {
   constructor(props) {
@@ -215,8 +216,28 @@ const DishDetail = (props) => {
     dish,
     addComment,
     comments,
+    isLoading,
+    errMess,
   } = props;
 
+  if (isLoading) {
+    return (
+      <div className="container">
+        <div className="row">
+          <Loading />
+        </div>
+      </div>
+    );
+  }
+  if (errMess) {
+    return (
+      <div className="container">
+        <div className="row">
+          <h4>{errMess}</h4>
+        </div>
+      </div>
+    );
+  }
   if (!isEmpty(dish)) {
     const { id } = dish;
     return (
@@ -247,6 +268,8 @@ DishDetail.propTypes = {
   dish: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
   addComment: PropTypes.func.isRequired,
   comments: PropTypes.arrayOf(PropTypes.object),
+  isLoading: PropTypes.bool.isRequired,
+  errMess: PropTypes.string,
 };
 
 /**
@@ -256,6 +279,7 @@ DishDetail.propTypes = {
 DishDetail.defaultProps = {
   dish: {},
   comments: [],
+  errMess: '',
 };
 
 export default DishDetail;
