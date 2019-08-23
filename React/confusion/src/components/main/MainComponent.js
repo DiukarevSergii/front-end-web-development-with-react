@@ -1,44 +1,52 @@
 import React, { Component } from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import {
+  Switch, Route, Redirect, withRouter,
+} from 'react-router-dom';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { actions } from 'react-redux-form';
 import Menu from '../menu/MenuComponent';
-import createDishes from '../../shared/dishes';
 import Header from '../HeaderComponent';
 import Home from '../HomeComponentt';
 import Footer from '../FooterComponent';
 import About from '../AboutComponent';
 import Contact from '../ContactComponent';
 import DishDetail from '../dish-detail/DishDetailComponent';
-import { COMMENTS } from '../../shared/comments';
-import { PROMOTIONS } from '../../shared/promotions';
-import { LEADERS } from '../../shared/leaders';
+import { addComment, fetchDishesAndComments } from '../../redux/ActionCreators';
+
+const mapStateToProps = state => ({
+  dishes: state.dishes,
+  comments: state.comments,
+  promotions: state.promotions,
+  leaders: state.leaders,
+});
+
+const mapDispatchToProps = dispatch => ({
+  addComment: (dishId, rating, author, sentence) => dispatch(addComment(dishId, rating, author, sentence)),
+  fetchDishesAndComments: () => { dispatch(fetchDishesAndComments()); },
+  resetFeedbackForm: () => { dispatch(actions.reset('feedback'))},
+});
 
 class Main extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      dishes: [],
-      comments: COMMENTS,
-      promotions: PROMOTIONS,
-      leaders: LEADERS,
-    };
-  }
-
   componentDidMount() {
-    createDishes.then((result) => {
-      this.setState({
-        dishes: result,
-      });
-    });
+    this.props.fetchDishesAndComments(); // eslint-disable-line
   }
 
   render() {
     const {
-      dishes, promotions, leaders, comments,
-    } = this.state;
+      promotions,
+      leaders,
+      comments,
+      dishes,
+      addComment, // eslint-disable-line no-shadow
+      resetFeedbackForm,
+    } = this.props;
 
     const HomePage = () => (
       <Home
-        dish={dishes.filter(dish => dish.featured)[0]}
+        dish={dishes.dishesList.filter(dish => dish.featured)[0]}
+        dishesLoading={dishes.isLoading}
+        dishesErrMess={dishes.errMess}
         promotion={promotions.filter(promo => promo.featured)[0]}
         leader={leaders.filter(leader => leader.featured)[0]}
       />
@@ -46,8 +54,11 @@ class Main extends Component {
 
     const DishWithId = ({ match }) => (
       <DishDetail
-        dish={dishes.filter(dish => dish.id === parseInt(match.params.dishId, 10))[0]}
-        comments={comments.filter(comment => comment.dishId === parseInt(match.params.dishId, 10))}
+        dish={dishes.dishesList.filter(dish => dish.id === parseInt(match.params.dishId, 10))[0]}
+        isLoading={dishes.isLoading}
+        errMess={dishes.errMess}
+        comments={comments.commentsList ? comments.commentsList.filter(comment => comment.dishId === parseInt(match.params.dishId, 10)) : []}
+        addComment={addComment}
       />
     );
 
@@ -58,7 +69,7 @@ class Main extends Component {
           <Route path="/home" component={HomePage} />
           <Route exact path="/menu" component={() => <Menu dishes={dishes} />} />
           <Route path="/menu/:dishId" component={DishWithId} />
-          <Route exact path="/contactus" component={Contact} />
+          <Route exact path="/contactus" component={() => <Contact resetFeedbackForm={resetFeedbackForm} />} />
           <Route exact path="/aboutus" component={() => <About leaders={leaders} />} />
           <Redirect to="/ " />
         </Switch>
@@ -68,4 +79,19 @@ class Main extends Component {
   }
 }
 
-export default Main;
+Main.propTypes = {
+  promotions: PropTypes.arrayOf(PropTypes.object).isRequired,
+  leaders: PropTypes.arrayOf(PropTypes.object).isRequired,
+  comments: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
+  dishes: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
+  addComment: PropTypes.func.isRequired,
+  fetchDishesAndComments: PropTypes.func.isRequired,
+  resetFeedbackForm: PropTypes.func.isRequired,
+};
+
+Main.defaultProps = {
+  comments: {},
+  dishes: {},
+};
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Main));

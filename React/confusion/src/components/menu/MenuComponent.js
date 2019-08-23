@@ -1,12 +1,15 @@
 import React from 'react';
 import {
-  Card, CardImg, CardImgOverlay, CardTitle, Breadcrumb, BreadcrumbItem,
+  Card, CardImg, CardImgOverlay, CardTitle, Breadcrumb, BreadcrumbItem, Row, Col,
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { Row, Col } from 'react-bootstrap';
+import './MenuComponent.scss';
+import { Loading } from '../LoadingComponent';
 
 function RenderMenuItem({ dish }) {
+  // console.log('dish', dish);
+
   return (
     <Col xs={6} md={6} key={dish.id}>
       <Card className="item" key={dish.id}>
@@ -22,15 +25,43 @@ function RenderMenuItem({ dish }) {
 }
 
 RenderMenuItem.propTypes = {
-  dish: PropTypes.objectOf(PropTypes.object).isRequired,
+  dish: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
+};
+
+RenderMenuItem.defaultProps = {
+  dish: {},
 };
 
 const Menu = (props) => {
   const { dishes } = props;
 
-  const menu = dishes.map(dish => (
-    <RenderMenuItem dish={dish} />
-  ));
+  if (dishes.isLoading) {
+    return (
+      <div className="container">
+        <div className="row">
+          <Loading />
+        </div>
+      </div>
+    );
+  }
+
+  const menu = dishes.dishesList.map((dish) => {
+    if (dishes.errMess) {
+      return (
+        <div className="container">
+          <div className="row">
+            <div className="col-12">
+              <h4>{dishes.errMess}</h4>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    return (
+      <RenderMenuItem key={dish.id} dish={dish} />
+    );
+  });
 
   return (
     <div>
@@ -39,7 +70,7 @@ const Menu = (props) => {
           <BreadcrumbItem><Link to="/home">Home</Link></BreadcrumbItem>
           <BreadcrumbItem active>Menu</BreadcrumbItem>
         </Breadcrumb>
-        <Row xs={12} md={12}>
+        <Row xs={12} md={12} className="menu">
           <h3>Menu</h3>
           <hr />
         </Row>
@@ -51,7 +82,9 @@ const Menu = (props) => {
   );
 };
 
-Menu.propTypes = { dishes: PropTypes.arrayOf(PropTypes.object).isRequired };
+Menu.propTypes = {
+  dishes: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]).isRequired,
+};
 
 
 export default Menu;
