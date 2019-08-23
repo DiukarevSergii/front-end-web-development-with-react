@@ -6,8 +6,10 @@
     "add": "^2.0.6",
     "bootstrap": "^4.0.0",
     "bootstrap-social": "^5.1.1",
+    "concurrently": "^4.1.2",
     "faker": "^4.1.0",
     "font-awesome": "^4.7.0",
+    "json-server": "^0.15.0",
     "lodash": "^4.17.13",
     "node-sass": "^4.12.0",
     "prop-types": "^15.7.2",
@@ -32,6 +34,7 @@
     "preinstall": "find . -name \"node_modules\" -exec rm -rf '{}' + && find . -name \"package-lock.json\" -exec rm -rf '{}' +",
     "install-packages": "npm install",
     "start": "react-scripts start",
+    "dev": "concurrently \"cd ./json-server && json-server --watch db.json -p 3011 -d 2000\" \"npm run start\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
