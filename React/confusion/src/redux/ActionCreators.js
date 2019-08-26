@@ -1,5 +1,6 @@
 import * as ActionTypes from './ActionTypes';
 import createDishes from '../shared/dishes';
+import { baseUrl } from '../shared/baseUrl';
 
 export const addComment = (dishId, rating, author, sentence) => ({ // eslint-disable-line import/prefer-default-export
   type: ActionTypes.ADD_COMMENT,
@@ -44,6 +45,15 @@ export const addComments = comments => ({
   payload: comments,
 });
 
+export const commentsLoading = () => ({
+  type: ActionTypes.COMMENTS_LOADING,
+});
+
+export const commentsFailed = errmess => ({
+  type: ActionTypes.COMMENTS_FAILED,
+  payload: errmess,
+});
+
 export const fetchDishesAndComments = () => (dispatch) => {
   dispatch(dishesLoading(true));
 
@@ -79,6 +89,31 @@ export const fetchDishesAndComments = () => (dispatch) => {
 
   setTimeout(() => {
     dispatch(addDishes(dishes));
+  }, 2000);
+
+  setTimeout(() => {
     dispatch(addComments(dishesComments));
-  }, 5000);
+  }, 3000);
+};
+
+export const addPromos = promos => ({
+  type: ActionTypes.ADD_PROMOS,
+  payload: promos,
+});
+
+export const promosLoading = () => ({
+  type: ActionTypes.PROMOS_LOADING,
+});
+
+export const promosFailed = errmess => ({
+  type: ActionTypes.PROMOS_FAILED,
+  payload: errmess,
+});
+
+export const fetchPromos = () => (dispatch) => {
+  dispatch(promosLoading(true));
+
+  return fetch(`${baseUrl}promotions`)
+    .then(response => response.json())
+    .then(promos => dispatch(addPromos(promos)));
 };
