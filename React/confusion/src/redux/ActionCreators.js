@@ -114,6 +114,18 @@ export const fetchPromos = () => (dispatch) => {
   dispatch(promosLoading(true));
 
   return fetch(`${baseUrl}promotions`)
+    .then((response) => {
+      if (response.ok) {
+        return response;
+      }
+      const error = new Error(`Error ${response.status}: ${response.statusText}`);
+      error.response = response;
+      throw error;
+    },
+    (error) => {
+      throw new Error(error.message);
+    })
     .then(response => response.json())
-    .then(promos => dispatch(addPromos(promos)));
+    .then(promos => dispatch(addPromos(promos)))
+    .catch(error => dispatch(promosFailed(error.message)));
 };
