@@ -1,213 +1,9 @@
 {
-  "dishes": [
-    {
-      "id": 0,
-      "name": "Uthappizza",
-      "image": "images/uthappizza.png",
-      "category": "mains",
-      "label": "Hot",
-      "price": "4.99",
-      "featured": true,
-      "description": "A unique combination of Indian Uthappam (pancake) and Italian pizza, topped with Cerignola olives, ripe vine cherry tomatoes, Vidalia onion, Guntur chillies and Buffalo Paneer."
-    },
-    {
-      "id": 1,
-      "name": "Zucchipakoda",
-      "image": "images/zucchipakoda.png",
-      "category": "appetizer",
-      "label": "",
-      "price": "1.99",
-      "featured": false,
-      "description": "Deep fried Zucchini coated with mildly spiced Chickpea flour batter accompanied with a sweet-tangy tamarind sauce"
-    },
-    {
-      "id": 2,
-      "name": "Vadonut",
-      "image": "images/vadonut.png",
-      "category": "appetizer",
-      "label": "New",
-      "price": "1.99",
-      "featured": false,
-      "description": "A quintessential ConFusion experience, is it a vada or is it a donut?"
-    },
-    {
-      "id": 3,
-      "name": "ElaiCheese Cake",
-      "image": "images/elaicheesecake.png",
-      "category": "dessert",
-      "label": "",
-      "price": "2.99",
-      "featured": false,
-      "description": "A delectable, semi-sweet New York Style Cheese Cake, with Graham cracker crust and spiced with Indian cardamoms"
-    }
-  ],
-  "comments": [
-    {
-      "id": 0,
-      "dishId": 0,
-      "rating": 5,
-      "comment": "Imagine all the eatables, living in conFusion!",
-      "author": "John Lemon",
-      "date": "2012-10-16T17:57:28.556094Z"
-    },
-    {
-      "id": 1,
-      "dishId": 0,
-      "rating": 4,
-      "comment": "Sends anyone to heaven, I wish I could get my mother-in-law to eat it!",
-      "author": "Paul McVites",
-      "date": "2014-09-05T17:57:28.556094Z"
-    },
-    {
-      "id": 2,
-      "dishId": 0,
-      "rating": 3,
-      "comment": "Eat it, just eat it!",
-      "author": "Michael Jaikishan",
-      "date": "2015-02-13T17:57:28.556094Z"
-    },
-    {
-      "id": 3,
-      "dishId": 0,
-      "rating": 4,
-      "comment": "Ultimate, Reaching for the stars!",
-      "author": "Ringo Starry",
-      "date": "2013-12-02T17:57:28.556094Z"
-    },
-    {
-      "id": 4,
-      "dishId": 0,
-      "rating": 2,
-      "comment": "It's your birthday, we're gonna party!",
-      "author": "25 Cent",
-      "date": "2011-12-02T17:57:28.556094Z"
-    },
-    {
-      "id": 5,
-      "dishId": 1,
-      "rating": 5,
-      "comment": "Imagine all the eatables, living in conFusion!",
-      "author": "John Lemon",
-      "date": "2012-10-16T17:57:28.556094Z"
-    },
-    {
-      "id": 6,
-      "dishId": 1,
-      "rating": 4,
-      "comment": "Sends anyone to heaven, I wish I could get my mother-in-law to eat it!",
-      "author": "Paul McVites",
-      "date": "2014-09-05T17:57:28.556094Z"
-    },
-    {
-      "id": 7,
-      "dishId": 1,
-      "rating": 3,
-      "comment": "Eat it, just eat it!",
-      "author": "Michael Jaikishan",
-      "date": "2015-02-13T17:57:28.556094Z"
-    },
-    {
-      "id": 8,
-      "dishId": 1,
-      "rating": 4,
-      "comment": "Ultimate, Reaching for the stars!",
-      "author": "Ringo Starry",
-      "date": "2013-12-02T17:57:28.556094Z"
-    },
-    {
-      "id": 9,
-      "dishId": 1,
-      "rating": 2,
-      "comment": "It's your birthday, we're gonna party!",
-      "author": "25 Cent",
-      "date": "2011-12-02T17:57:28.556094Z"
-    },
-    {
-      "id": 10,
-      "dishId": 2,
-      "rating": 5,
-      "comment": "Imagine all the eatables, living in conFusion!",
-      "author": "John Lemon",
-      "date": "2012-10-16T17:57:28.556094Z"
-    },
-    {
-      "id": 11,
-      "dishId": 2,
-      "rating": 4,
-      "comment": "Sends anyone to heaven, I wish I could get my mother-in-law to eat it!",
-      "author": "Paul McVites",
-      "date": "2014-09-05T17:57:28.556094Z"
-    },
-    {
-      "id": 12,
-      "dishId": 2,
-      "rating": 3,
-      "comment": "Eat it, just eat it!",
-      "author": "Michael Jaikishan",
-      "date": "2015-02-13T17:57:28.556094Z"
-    },
-    {
-      "id": 13,
-      "dishId": 2,
-      "rating": 4,
-      "comment": "Ultimate, Reaching for the stars!",
-      "author": "Ringo Starry",
-      "date": "2013-12-02T17:57:28.556094Z"
-    },
-    {
-      "id": 14,
-      "dishId": 2,
-      "rating": 2,
-      "comment": "It's your birthday, we're gonna party!",
-      "author": "25 Cent",
-      "date": "2011-12-02T17:57:28.556094Z"
-    },
-    {
-      "id": 15,
-      "dishId": 3,
-      "rating": 5,
-      "comment": "Imagine all the eatables, living in conFusion!",
-      "author": "John Lemon",
-      "date": "2012-10-16T17:57:28.556094Z"
-    },
-    {
-      "id": 16,
-      "dishId": 3,
-      "rating": 4,
-      "comment": "Sends anyone to heaven, I wish I could get my mother-in-law to eat it!",
-      "author": "Paul McVites",
-      "date": "2014-09-05T17:57:28.556094Z"
-    },
-    {
-      "id": 17,
-      "dishId": 3,
-      "rating": 3,
-      "comment": "Eat it, just eat it!",
-      "author": "Michael Jaikishan",
-      "date": "2015-02-13T17:57:28.556094Z"
-    },
-    {
-      "id": 18,
-      "dishId": 3,
-      "rating": 4,
-      "comment": "Ultimate, Reaching for the stars!",
-      "author": "Ringo Starry",
-      "date": "2013-12-02T17:57:28.556094Z"
-    },
-    {
-      "id": 19,
-      "dishId": 3,
-      "rating": 2,
-      "comment": "It's your birthday, we're gonna party!",
-      "author": "25 Cent",
-      "date": "2011-12-02T17:57:28.556094Z"
-    }
-  ],
   "promotions": [
     {
       "id": 0,
       "name": "Weekend Grand Buffet",
-      "image": "/assets/images/buffet.png",
+      "image": "/images/buffet.png",
       "label": "New",
       "price": "19.99",
       "featured": true,
@@ -218,7 +14,7 @@
     {
       "id": 0,
       "name": "Peter Pan",
-      "image": "images/alberto.png",
+      "image": "images/Gordon-ramsay-455x455.jpg",
       "designation": "Chief Epicurious Officer",
       "abbr": "CEO",
       "featured": false,
@@ -227,7 +23,7 @@
     {
       "id": 1,
       "name": "Dhanasekaran Witherspoon",
-      "image": "images/alberto.png",
+      "image": "images/Gordon-ramsay-455x455.jpg",
       "designation": "Chief Food Officer",
       "abbr": "CFO",
       "featured": false,
@@ -236,7 +32,7 @@
     {
       "id": 2,
       "name": "Agumbe Tang",
-      "image": "images/alberto.png",
+      "image": "images/Gordon-ramsay-455x455.jpg",
       "designation": "Chief Taste Officer",
       "abbr": "CTO",
       "featured": false,
@@ -244,12 +40,12 @@
     },
     {
       "id": 3,
-      "name": "Alberto Somayya",
-      "image": "images/alberto.png",
+      "name": "Gordon Ramsay",
+      "image": "images/Gordon-ramsay-455x455.jpg",
       "designation": "Executive Chef",
       "abbr": "EC",
       "featured": true,
-      "description": "Award winning three-star Michelin chef with wide International experience having worked closely with whos-who in the culinary world, he specializes in creating mouthwatering Indo-Italian fusion experiences. He says, Put together the cuisines from the two craziest cultures, and you get a winning hit! Amma Mia!"
+      "description": "Gordon James Ramsay OBE (born 8 November 1966) is a British chef, restaurateur, writer, television personality and food critic. He was born in Johnstone, Scotland, and raised in Stratford-upon-Avon, England. His restaurants have been awarded 16 Michelin stars in total and currently hold a total of seven."
     }
   ],
   "feedback": [
