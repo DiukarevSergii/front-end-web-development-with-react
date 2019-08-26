@@ -12,7 +12,7 @@ import Footer from '../FooterComponent';
 import About from '../AboutComponent';
 import Contact from '../ContactComponent';
 import DishDetail from '../dish-detail/DishDetailComponent';
-import { addComment, fetchDishesAndComments } from '../../redux/ActionCreators';
+import { addComment, fetchDishesAndComments, fetchPromos } from '../../redux/ActionCreators';
 
 const mapStateToProps = state => ({
   dishes: state.dishes,
@@ -23,13 +23,15 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   addComment: (dishId, rating, author, sentence) => dispatch(addComment(dishId, rating, author, sentence)),
-  fetchDishesAndComments: () => { dispatch(fetchDishesAndComments()); },
-  resetFeedbackForm: () => { dispatch(actions.reset('feedback'))},
+  fetchDishesAndComments: () => dispatch(fetchDishesAndComments()),
+  resetFeedbackForm: () => dispatch(actions.reset('feedback')),
+  fetchPromos: () => dispatch(fetchPromos()),
 });
 
 class Main extends Component {
   componentDidMount() {
     this.props.fetchDishesAndComments(); // eslint-disable-line
+    this.props.fetchPromos(); // eslint-disable-line
   }
 
   render() {
@@ -47,7 +49,11 @@ class Main extends Component {
         dish={dishes.dishesList.filter(dish => dish.featured)[0]}
         dishesLoading={dishes.isLoading}
         dishesErrMess={dishes.errMess}
-        promotion={promotions.filter(promo => promo.featured)[0]}
+
+        promotion={promotions.promosList.filter(promo => promo.featured)[0]}
+        promoLoading={promotions.isLoading}
+        promoErrMess={promotions.errMess}
+
         leader={leaders.filter(leader => leader.featured)[0]}
       />
     );
@@ -86,6 +92,7 @@ Main.propTypes = {
   dishes: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   addComment: PropTypes.func.isRequired,
   fetchDishesAndComments: PropTypes.func.isRequired,
+  fetchPromos: PropTypes.func.isRequired,
   resetFeedbackForm: PropTypes.func.isRequired,
 };
 
