@@ -12,7 +12,7 @@ import Footer from '../FooterComponent';
 import About from '../AboutComponent';
 import Contact from '../ContactComponent';
 import DishDetail from '../dish-detail/DishDetailComponent';
-import { addComment, fetchDishesAndComments, fetchPromos } from '../../redux/ActionCreators';
+import { postComment, fetchDishesAndComments, fetchPromos } from '../../redux/ActionCreators';
 
 const mapStateToProps = state => ({
   dishes: state.dishes,
@@ -22,7 +22,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  addComment: (dishId, rating, author, sentence) => dispatch(addComment(dishId, rating, author, sentence)),
+  postComment: (dishId, rating, author, sentence) => dispatch(postComment(dishId, rating, author, sentence)),
   fetchDishesAndComments: () => dispatch(fetchDishesAndComments()),
   resetFeedbackForm: () => dispatch(actions.reset('feedback')),
   fetchPromos: () => dispatch(fetchPromos()),
@@ -40,7 +40,7 @@ class Main extends Component {
       leaders,
       comments,
       dishes,
-      addComment, // eslint-disable-line no-shadow
+      postComment, // eslint-disable-line no-shadow
       resetFeedbackForm,
     } = this.props;
 
@@ -64,7 +64,7 @@ class Main extends Component {
         isLoading={dishes.isLoading}
         errMess={dishes.errMess}
         comments={comments.commentsList ? comments.commentsList.filter(comment => comment.dishId === parseInt(match.params.dishId, 10)) : []}
-        addComment={addComment}
+        postComment={postComment}
       />
     );
 
@@ -90,7 +90,7 @@ Main.propTypes = {
   leaders: PropTypes.arrayOf(PropTypes.object).isRequired,
   comments: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   dishes: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
-  addComment: PropTypes.func.isRequired,
+  postComment: PropTypes.func.isRequired,
   fetchDishesAndComments: PropTypes.func.isRequired,
   fetchPromos: PropTypes.func.isRequired,
   resetFeedbackForm: PropTypes.func.isRequired,

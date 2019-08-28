@@ -13,10 +13,6 @@ export const Comments = (state = { //eslint-disable-line
 
     case ActionTypes.ADD_COMMENT: {
       const comment = action.payload;
-      comment.id = state.commentsList.length;
-      comment.date = new Intl
-        .DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit' })
-        .format(new Date());
       return {
         ...state, isLoading: false, errMess: null, commentsList: state.commentsList.concat(comment),
       };

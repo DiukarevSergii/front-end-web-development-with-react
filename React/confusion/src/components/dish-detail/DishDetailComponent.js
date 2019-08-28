@@ -15,6 +15,7 @@ import { isEmpty } from 'lodash';
 import './DishDetailComponent.scss';
 import { Control, Errors, LocalForm } from 'react-redux-form';
 import { Loading } from '../LoadingComponent';
+import { baseUrl } from '../../shared/baseUrl';
 
 class CommentForm extends Component {
   constructor(props) {
@@ -38,10 +39,10 @@ class CommentForm extends Component {
   handleSubmit = (values) => {
     console.log(`Current State is: ${JSON.stringify(values)}`);
     this.toggleModal();
-    const { addComment, dishId } = this.props;
+    const { postComment, dishId } = this.props;
     const { rating, author, sentence } = values;
 
-    addComment(dishId, rating, author, sentence);
+    postComment(dishId, rating, author, sentence);
   };
 
   render() {
@@ -128,12 +129,14 @@ class CommentForm extends Component {
 
 CommentForm.propTypes = {
   dishId: PropTypes.number.isRequired,
-  addComment: PropTypes.func.isRequired,
+  postComment: PropTypes.func.isRequired,
 };
 
 class RenderComments extends Component {
   render() {
-    const { comments, addComment, dishId } = this.props;
+    const { comments, postComment, dishId } = this.props;
+
+    console.log(comments);
 
     if (comments.length > 0) {
       const selectedDishComments = comments.map((comment) => {
@@ -160,7 +163,7 @@ class RenderComments extends Component {
             {selectedDishComments}
           </Row>
           <Row className="item">
-            <CommentForm dishId={dishId} addComment={addComment} />
+            <CommentForm dishId={dishId} postComment={postComment} />
           </Row>
         </Col>
       );
@@ -171,7 +174,7 @@ class RenderComments extends Component {
 
 RenderComments.propTypes = {
   comments: PropTypes.arrayOf(PropTypes.object).isRequired,
-  addComment: PropTypes.func.isRequired,
+  postComment: PropTypes.func.isRequired,
   dishId: PropTypes.number.isRequired,
 };
 
@@ -184,7 +187,7 @@ function RenderDish({ dish }) {
   return (
     <Col xs={6} md={6} key={dish.id}>
       <Card className="item">
-        <CardImg src={image} alt={name} />
+        <CardImg src={baseUrl + image} alt={name} />
         <CardBody>
           <CardTitle>{name}</CardTitle>
           <CardText>{description}</CardText>
@@ -214,7 +217,7 @@ RenderDish.defaultProps = {
 const DishDetail = (props) => {
   const {
     dish,
-    addComment,
+    postComment,
     comments,
     isLoading,
     errMess,
@@ -254,7 +257,7 @@ const DishDetail = (props) => {
         </div>
         <Row className="show-item">
           <RenderDish dish={dish} />
-          <RenderComments comments={comments} addComment={addComment} dishId={id} />
+          <RenderComments comments={comments} postComment={postComment} dishId={id} />
         </Row>
       </div>
     );
@@ -266,7 +269,7 @@ const DishDetail = (props) => {
 
 DishDetail.propTypes = {
   dish: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
-  addComment: PropTypes.func.isRequired,
+  postComment: PropTypes.func.isRequired,
   comments: PropTypes.arrayOf(PropTypes.object),
   isLoading: PropTypes.bool.isRequired,
   errMess: PropTypes.string,
