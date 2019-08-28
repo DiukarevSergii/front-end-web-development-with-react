@@ -36,7 +36,7 @@ RenderLeader.propTypes = {
 function About(props) {
   let { leaders } = props;
 
-  leaders = leaders.map(leader => (
+  leaders = leaders.leadersList.map(leader => (
     <RenderLeader key={leader.id} leader={leader} />
   ));
 

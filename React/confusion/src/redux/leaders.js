@@ -1,7 +1,25 @@
-import { LEADERS } from '../shared/leaders';
+import * as ActionTypes from './ActionTypes';
 
-export const Leaders = (state = LEADERS, action) => { // eslint-disable-line
+// eslint-disable-next-line import/prefer-default-export
+export const Leaders = (state = {
+  isLoading: true,
+  errMess: null,
+  leadersList: [],
+}, action) => {
   switch (action.type) {
+    case ActionTypes.ADD_LEADERS:
+      return {
+        ...state, isLoading: false, errMess: null, leadersList: action.payload,
+      };
+
+    case ActionTypes.LEADERS_LOADING:
+      return {
+        ...state, isLoading: true, errMess: null, leadersList: [],
+      };
+
+    case ActionTypes.LEADERS_FAILED:
+      return { ...state, isLoading: false, errMess: action.payload };
+
     default:
       return state;
   }

@@ -52,7 +52,7 @@ function Home(props) {
   const {
     dish, dishesLoading, dishesErrMess,
     promotion, promoLoading, promoErrMess,
-    leader,
+    leader, leadersLoading, leadersErrMess,
   } = props;
 
   return (
@@ -65,7 +65,7 @@ function Home(props) {
           <RenderCard item={promotion} isLoading={promoLoading} errMess={promoErrMess} />
         </div>
         <div className="col-12 col-md m-1">
-          <RenderCard item={leader} isLoading={false} errMess={null} />
+          <RenderCard item={leader} isLoading={leadersLoading} errMess={leadersErrMess} />
         </div>
       </div>
     </div>
@@ -80,12 +80,15 @@ Home.propTypes = {
   promoLoading: PropTypes.bool.isRequired,
   promoErrMess: PropTypes.string,
   leader: PropTypes.oneOfType([PropTypes.object, PropTypes.number]).isRequired,
+  leadersLoading: PropTypes.bool.isRequired,
+  leadersErrMess: PropTypes.string,
 };
 
 Home.defaultProps = {
   dish: {},
   dishesErrMess: '',
   promoErrMess: '',
+  leadersErrMess: '',
 };
 
 export default Home;

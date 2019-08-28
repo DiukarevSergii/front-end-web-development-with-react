@@ -12,7 +12,9 @@ import Footer from '../FooterComponent';
 import About from '../AboutComponent';
 import Contact from '../ContactComponent';
 import DishDetail from '../dish-detail/DishDetailComponent';
-import { postComment, fetchDishesAndComments, fetchPromos } from '../../redux/ActionCreators';
+import {
+  postComment, fetchDishesAndComments, fetchPromos, fetchLeaders,
+} from '../../redux/ActionCreators';
 
 const mapStateToProps = state => ({
   dishes: state.dishes,
@@ -26,12 +28,14 @@ const mapDispatchToProps = dispatch => ({
   fetchDishesAndComments: () => dispatch(fetchDishesAndComments()),
   resetFeedbackForm: () => dispatch(actions.reset('feedback')),
   fetchPromos: () => dispatch(fetchPromos()),
+  fetchLeaders: () => dispatch(fetchLeaders()),
 });
 
 class Main extends Component {
   componentDidMount() {
     this.props.fetchDishesAndComments(); // eslint-disable-line
     this.props.fetchPromos(); // eslint-disable-line
+    this.props.fetchLeaders(); // eslint-disable-line
   }
 
   render() {
@@ -54,7 +58,9 @@ class Main extends Component {
         promoLoading={promotions.isLoading}
         promoErrMess={promotions.errMess}
 
-        leader={leaders.filter(leader => leader.featured)[0]}
+        leader={leaders.leadersList.filter(leader => leader.featured)[0]}
+        leadersLoading={leaders.isLoading}
+        leadersErrMess={leaders.errMess}
       />
     );
 
