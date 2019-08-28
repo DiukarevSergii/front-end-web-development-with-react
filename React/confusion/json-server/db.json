@@ -1,4 +1,134 @@
 {
+  "comments": [
+    {
+      "dishId": 0,
+      "rating": 1,
+      "author": "Maverick Koepp",
+      "comment": "Ducimus repellendus optio libero molestias iste voluptatibus.",
+      "date": "Oct 28, 2018",
+      "id": 1
+    },
+    {
+      "dishId": 0,
+      "rating": 1,
+      "author": "Sandy Friesen",
+      "comment": "Aliquam deserunt error quia iste rem minima hic quibusdam et.",
+      "date": "Jun 14, 2019",
+      "id": 2
+    },
+    {
+      "dishId": 0,
+      "rating": 1,
+      "author": "Allan Heaney",
+      "comment": "Unde enim voluptatem tempora voluptatem odio est iure molestiae eos.",
+      "date": "Jan 25, 2019",
+      "id": 3
+    },
+    {
+      "dishId": 1,
+      "rating": 1,
+      "author": "Alexandra Bednar MD",
+      "comment": "Aliquam dicta est.",
+      "date": "Jul 29, 2019",
+      "id": 4
+    },
+    {
+      "dishId": 0,
+      "rating": 1,
+      "author": "Esther Effertz",
+      "comment": "Aut nihil cupiditate voluptates rerum eaque sapiente.",
+      "date": "Jul 08, 2019",
+      "id": 5
+    },
+    {
+      "dishId": 1,
+      "rating": 1,
+      "author": "Arlie Rolfson PhD",
+      "comment": "Consectetur fugiat nesciunt id ipsam velit natus aliquam quis ipsa.",
+      "date": "Jan 25, 2019",
+      "id": 6
+    },
+    {
+      "dishId": 1,
+      "rating": 1,
+      "author": "Susana Kassulke",
+      "comment": "Et veniam aut veniam eum ullam iure aspernatur in voluptas.",
+      "date": "Mar 05, 2019",
+      "id": 7
+    },
+    {
+      "dishId": 1,
+      "rating": 1,
+      "author": "Gloria Smitham",
+      "comment": "Ea ut modi eum et.",
+      "date": "Dec 31, 2018",
+      "id": 8
+    },
+    {
+      "dishId": 2,
+      "rating": 1,
+      "author": "Brad Carter",
+      "comment": "Libero voluptatum illum.",
+      "date": "Feb 12, 2019",
+      "id": 9
+    },
+    {
+      "dishId": 2,
+      "rating": 1,
+      "author": "Woodrow Daniel",
+      "comment": "Sit rerum corrupti inventore ut sed eaque id doloremque.",
+      "date": "Dec 25, 2018",
+      "id": 10
+    },
+    {
+      "dishId": 2,
+      "rating": 1,
+      "author": "Justine Crooks",
+      "comment": "Nam sint nam in eligendi magnam ea dolor.",
+      "date": "Apr 12, 2019",
+      "id": 11
+    },
+    {
+      "dishId": 2,
+      "rating": 1,
+      "author": "Lenna Kertzmann V",
+      "comment": "Expedita et repellendus enim accusantium nam quas et.",
+      "date": "Mar 07, 2019",
+      "id": 12
+    },
+    {
+      "dishId": 3,
+      "rating": 1,
+      "author": "Ms. Jena Barrows",
+      "comment": "Nesciunt consectetur odio saepe et.",
+      "date": "Sep 22, 2018",
+      "id": 13
+    },
+    {
+      "dishId": 3,
+      "rating": 1,
+      "author": "Kiara Schiller",
+      "comment": "Placeat veniam sunt adipisci.",
+      "date": "Mar 04, 2019",
+      "id": 14
+    },
+    {
+      "dishId": 3,
+      "rating": 1,
+      "author": "Delores Runolfsson",
+      "comment": "Dolores est iusto dolor mollitia.",
+      "date": "Dec 04, 2018",
+      "id": 15
+    },
+    {
+      "dishId": 3,
+      "rating": 1,
+      "author": "Freeman Gottlieb",
+      "comment": "Nisi ipsam aperiam.",
+      "date": "Apr 16, 2019",
+      "id": 16
+    }
+  ],
   "promotions": [
     {
       "id": 0,
