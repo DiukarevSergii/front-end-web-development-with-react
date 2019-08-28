@@ -136,17 +136,15 @@ class RenderComments extends Component {
   render() {
     const { comments, postComment, dishId } = this.props;
 
-    console.log(comments);
-
     if (comments.length > 0) {
-      const selectedDishComments = comments.map((comment) => {
+      const selectedDishComments = comments.map((item) => {
         const {
-          id, author, date, sentence,
-        } = comment;
+          id, author, date, comment,
+        } = item;
 
         return (
           <Row key={id}>
-            <CardText>{sentence}</CardText>
+            <CardText>{comment}</CardText>
             <CardText>{`-- ${author}, ${date}`}</CardText>
             <CardText> </CardText>
             <CardText> </CardText>

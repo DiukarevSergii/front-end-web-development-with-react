@@ -35,8 +35,7 @@ export const addComment = comment => ({
   payload: comment,
 });
 
-const insertComment = (dishId, rating, author, comment, date) => {
-  console.log('insert comment');
+export const postComment = (dishId, rating, author, comment, date) => (dispatch) => {
   const newComment = {
     dishId,
     rating,
@@ -68,35 +67,10 @@ const insertComment = (dishId, rating, author, comment, date) => {
       throw error;
     })
     .then(response => response.json())
-    .catch((error) => {
-      console.log('insert comments', error.message);
-      throw new Error(error);
-    });
-};
-
-export const postComment = (dishId, rating, author, comment, date) => (dispatch) => {
-  console.log('post comment');
-
-  insertComment(dishId, rating, author, comment, date)
     .then(response => dispatch(addComment(response)))
-    .catch((error) => { console.log('post comments', error.message); alert(`Your comment could not be posted\nError: ${error.message}`); });
-};
-
-export const postComments = (comments) => {
-  console.log('populate comments');
-
-  comments.forEach((comment) => {
-    const {
-      dishId, rating, author, sentence, date,
-    } = comment;
-
-    insertComment(dishId, rating, author, sentence, date)
-      .then(response => response)
-      .catch((error) => {
-        console.log('post comments', error.message);
-        // alert(`Your comment could not be posted\nError: ${error.message}`);
-      });
-  });
+    .catch((error) => {
+      alert(`Your comment could not be posted\nError: ${error.message}`);
+    });
 };
 
 export const addComments = comments => ({
@@ -113,26 +87,45 @@ export const commentsFailed = errmess => ({
   payload: errmess,
 });
 
-export const fetchDishesAndComments = () => (dispatch) => {
+const getComments = () => fetch(`${baseUrl}comments`)
+  .then((response) => {
+    if (response.ok) {
+      return response;
+    }
+    const error = new Error(`Error ${response.status}: ${response.statusText}`);
+    error.response = response;
+    throw error;
+  },
+  (error) => {
+    throw new Error(error.message);
+  })
+  .then(response => response.json())
+  .catch(error => error.message);
+
+export const fetchDishesAndComments = () => async (dispatch) => {
   dispatch(dishesLoading(true));
+  dispatch(commentsLoading(true));
 
   const dishes = [];
-  const dishesComments = [];
 
+  const dishesComments = await getComments();
+  const populateComments = dishesComments ? dishesComments.length > 0 : [];
 
-  createDishes.then((dishArray) => {
-    dishArray.forEach((dishItem) => {
-      const dish = { ...dishItem };
-      delete dish.comments;
+  const dishArray = await createDishes();
 
-      const {
-        category, description, featured, id, image, label, name, price,
-      } = dish;
+  dishArray.forEach((dishItem) => {
+    const dish = { ...dishItem };
+    delete dish.comments;
 
-      dishes.push({
-        category, description, featured, id, image, label, name, price,
-      });
+    const {
+      category, description, featured, id, image, label, name, price,
+    } = dish;
 
+    dishes.push({
+      category, description, featured, id, image, label, name, price,
+    });
+
+    if (!populateComments) {
       const { comments } = dishItem;
       comments.forEach((commentItem) => {
         const {
@@ -143,19 +136,17 @@ export const fetchDishesAndComments = () => (dispatch) => {
           id: dishesComments.length, dishId, rating, author, sentence, date,
         });
       });
-    });
+    }
   });
 
-  setTimeout(() => {
-    dispatch(addDishes(dishes));
-  }, 2000);
+  dispatch(addDishes(dishes));
 
-  setTimeout(() => {
-    // fixme TypeError: Failed to fetch
-    //   postComments(dishesComments);
+  // todo: extend with post comment. for case if comments array is initially empty
+  //   postComments(dishesComments);
 
+  if (dishesComments.length) {
     dispatch(addComments(dishesComments));
-  }, 1000);
+  }
 };
 
 export const addPromos = promos => ({

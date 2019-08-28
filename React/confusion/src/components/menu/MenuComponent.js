@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './MenuComponent.scss';
 import { Loading } from '../LoadingComponent';
+import { baseUrl } from '../../shared/baseUrl';
 
 function RenderMenuItem({ dish }) {
   // console.log('dish', dish);
@@ -14,7 +15,7 @@ function RenderMenuItem({ dish }) {
     <Col xs={6} md={6} key={dish.id}>
       <Card className="item" key={dish.id}>
         <Link to={`/menu/${dish.id}`}>
-          <CardImg src={dish.image} alt={dish.name} />
+          <CardImg src={baseUrl + dish.image} alt={dish.name} />
           <CardImgOverlay>
             <CardTitle>{dish.name}</CardTitle>
           </CardImgOverlay>

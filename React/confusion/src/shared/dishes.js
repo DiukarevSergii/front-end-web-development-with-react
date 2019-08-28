@@ -72,4 +72,4 @@ async function createDishes() {
   return Promise.all(promises);
 }
 
-export default createDishes();
+export default createDishes;
