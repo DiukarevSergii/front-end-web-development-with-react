@@ -6,6 +6,7 @@ import {
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './AboutComponent.scss';
+import { baseUrl } from '../shared/baseUrl';
 
 const RenderLeader = ({ leader }) => {
   const {
@@ -16,7 +17,7 @@ const RenderLeader = ({ leader }) => {
     <div key={id} className="col-12 mt-5">
       <Media tag="li">
         <Media left className="col-3 ml-3">
-          <Media object src={image} alt={name} className="leader_image" />
+          <Media object src={baseUrl + image} alt={name} className="leader_image" />
         </Media>
         <Media body className="col-9 ml-9">
           <Media heading>{name}</Media>
