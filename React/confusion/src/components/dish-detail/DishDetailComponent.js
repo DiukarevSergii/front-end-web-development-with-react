@@ -146,8 +146,8 @@ class RenderComments extends Component {
             } = item;
 
             return (
-              <Fade in>
-                <Row key={id}>
+              <Fade in key={id}>
+                <Row>
                   <CardText>{comment}</CardText>
                   <CardText>{`-- ${author}, ${date}`}</CardText>
                   <CardText> </CardText>
