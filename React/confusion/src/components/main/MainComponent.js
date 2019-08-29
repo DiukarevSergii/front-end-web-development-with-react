@@ -92,8 +92,8 @@ class Main extends Component {
 }
 
 Main.propTypes = {
-  promotions: PropTypes.arrayOf(PropTypes.object).isRequired,
-  leaders: PropTypes.arrayOf(PropTypes.object).isRequired,
+  promotions: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]).isRequired,
+  leaders: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]).isRequired,
   comments: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   dishes: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   postComment: PropTypes.func.isRequired,

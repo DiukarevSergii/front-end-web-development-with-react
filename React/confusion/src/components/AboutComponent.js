@@ -117,7 +117,7 @@ The Wit and Wisdom of Yogi Berra,
 }
 
 About.propTypes = {
-  leaders: PropTypes.arrayOf(PropTypes.object).isRequired,
+  leaders: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]).isRequired,
 };
 
 export default About;
