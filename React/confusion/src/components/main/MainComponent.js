@@ -14,7 +14,7 @@ import About from '../AboutComponent';
 import Contact from '../ContactComponent';
 import DishDetail from '../dish-detail/DishDetailComponent';
 import {
-  postComment, fetchDishesAndComments, fetchPromos, fetchLeaders,
+  postComment as postCommentRedux, fetchDishesAndComments, fetchPromos, fetchLeaders,
 } from '../../redux/ActionCreators';
 
 const mapStateToProps = state => ({
@@ -25,7 +25,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  postComment: (dishId, rating, author, sentence) => dispatch(postComment(dishId, rating, author, sentence)),
+  postComment: (dishId, rating, author, sentence) => dispatch(postCommentRedux(dishId, rating, author, sentence)),
   fetchDishesAndComments: () => dispatch(fetchDishesAndComments()),
   resetFeedbackForm: () => dispatch(actions.reset('feedback')),
   fetchPromos: () => dispatch(fetchPromos()),
@@ -45,7 +45,7 @@ class Main extends Component {
       leaders,
       comments,
       dishes,
-      postComment, // eslint-disable-line no-shadow
+      postComment,
       resetFeedbackForm,
       location,
     } = this.props;
