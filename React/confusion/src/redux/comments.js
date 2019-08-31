@@ -12,6 +12,8 @@ export const Comments = (state = { //eslint-disable-line
       };
 
     case ActionTypes.ADD_COMMENT: {
+      alert('ActionTypes.ADD_COMMENT');
+
       const comment = action.payload;
       return {
         ...state, isLoading: false, errMess: null, commentsList: state.commentsList.concat(comment),

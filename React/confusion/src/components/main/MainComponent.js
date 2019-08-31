@@ -13,7 +13,8 @@ import About from '../AboutComponent';
 import Contact from '../ContactComponent';
 import DishDetail from '../dish-detail/DishDetailComponent';
 import {
-  postComment as postCommentRedux, fetchDishesAndComments, fetchPromos, fetchLeaders,
+  postComment as postCommentRedux, postFeedback as postFeedbackRedux,
+  fetchDishesAndComments, fetchPromos, fetchLeaders,
 } from '../../redux/ActionCreators';
 
 const mapStateToProps = state => ({
@@ -25,6 +26,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   postComment: (dishId, rating, author, sentence) => dispatch(postCommentRedux(dishId, rating, author, sentence)),
+  postFeedback: (firstname, lastname, telnum, email, agree, contactType, message) => dispatch(postFeedbackRedux(firstname, lastname, telnum, email, agree, contactType, message)),
   fetchDishesAndComments: () => dispatch(fetchDishesAndComments()),
   resetFeedbackForm: () => dispatch(actions.reset('feedback')),
   fetchPromos: () => dispatch(fetchPromos()),
@@ -46,6 +48,7 @@ class Main extends Component {
       dishes,
       postComment,
       resetFeedbackForm,
+      postFeedback,
     } = this.props;
 
     const HomePage = () => (
@@ -81,7 +84,7 @@ class Main extends Component {
           <Route path="/home" component={HomePage} />
           <Route exact path="/menu" component={() => <Menu dishes={dishes} />} />
           <Route path="/menu/:dishId" component={DishWithId} />
-          <Route exact path="/contactus" component={() => <Contact resetFeedbackForm={resetFeedbackForm} />} />
+              <Route exact path="/contactus" component={() => <Contact resetFeedbackForm={resetFeedbackForm} postFeedback={postFeedback} />} />
           <Route exact path="/aboutus" component={() => <About leaders={leaders} />} />
           <Redirect to="/ " />
         </Switch>
@@ -100,6 +103,7 @@ Main.propTypes = {
   fetchDishesAndComments: PropTypes.func.isRequired,
   fetchPromos: PropTypes.func.isRequired,
   resetFeedbackForm: PropTypes.func.isRequired,
+  postFeedback: PropTypes.func.isRequired,
 };
 
 Main.defaultProps = {

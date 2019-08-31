@@ -13,10 +13,13 @@ class Contact extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleSubmit = (values) => {
-    console.log(`Current State is: ${JSON.stringify(values)}`);
-    alert(`Current State is: ${JSON.stringify(values)}`);
-    const { resetFeedbackForm } = this.props;
+  handleSubmit = async (values) => {
+    const { resetFeedbackForm, postFeedback } = this.props;
+    const {
+      firstname, lastname, telnum, email, agree, contactType, message,
+    } = values;
+    const feedback = await postFeedback(firstname, lastname, telnum, email, agree, contactType, message);
+    alert(`Thank you for your feedback: ${JSON.stringify(feedback)}`);
     resetFeedbackForm();
   };
 
@@ -224,6 +227,7 @@ Email
 
 Contact.propTypes = {
   resetFeedbackForm: PropTypes.func.isRequired,
+  postFeedback: PropTypes.func.isRequired,
 
 };
 

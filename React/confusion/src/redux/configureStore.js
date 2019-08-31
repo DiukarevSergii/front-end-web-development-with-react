@@ -6,7 +6,8 @@ import { Dishes } from './dishes';
 import { Comments } from './comments';
 import { Promotions } from './promotions';
 import { Leaders } from './leaders';
-import { InitialFeedback } from './forms';
+// import { InitialFeedback } from './forms';
+import { Feedback } from './feedback';
 
 export const ConfigureStore = () => { // eslint-disable-line
   const store = createStore(
@@ -16,7 +17,7 @@ export const ConfigureStore = () => { // eslint-disable-line
       promotions: Promotions,
       leaders: Leaders,
       ...createForms({
-        feedback: InitialFeedback,
+        feedback: Feedback,
       }),
     }),
     applyMiddleware(thunk, logger),
