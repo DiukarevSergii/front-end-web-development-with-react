@@ -5,7 +5,6 @@ import {
 } from 'reactstrap';
 import PropTypes from 'prop-types';
 import './HomeComponent.scss';
-import { FadeTransform } from 'react-animation-components';
 import { Loading } from './LoadingComponent';
 import { baseUrl } from '../shared/baseUrl';
 
@@ -26,21 +25,15 @@ function RenderCard({ item, isLoading, errMess }) {
   } = item;
 
   return (
-    <FadeTransform
-      in
-      transformProps={{
-        exitTransform: 'scale(0.5) translateY(-50%)',
-      }}
-    >
-      <Card>
-        <CardImg src={baseUrl + image} alt={name} className="home" />
-        <CardBody>
-          <CardTitle>{name}</CardTitle>
-          {designation ? <CardSubtitle>{designation}</CardSubtitle> : null}
-          <CardText>{description}</CardText>
-        </CardBody>
-      </Card>
-    </FadeTransform>
+
+    <Card>
+      <CardImg src={baseUrl + image} alt={name} className="home" />
+      <CardBody>
+        <CardTitle>{name}</CardTitle>
+        {designation ? <CardSubtitle>{designation}</CardSubtitle> : null}
+        <CardText>{description}</CardText>
+      </CardBody>
+    </Card>
   );
 }
 

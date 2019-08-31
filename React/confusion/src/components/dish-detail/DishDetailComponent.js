@@ -14,7 +14,6 @@ import { Row, Col } from 'react-bootstrap';
 import { isEmpty } from 'lodash';
 import './DishDetailComponent.scss';
 import { Control, Errors, LocalForm } from 'react-redux-form';
-import { FadeTransform, Fade, Stagger } from 'react-animation-components';
 import { Loading } from '../LoadingComponent';
 import { baseUrl } from '../../shared/baseUrl';
 
@@ -139,24 +138,20 @@ class RenderComments extends Component {
 
     if (comments.length > 0) {
       const selectedDishComments = (
-        <Stagger in>
-          {comments.map((item) => {
-            const {
-              id, author, date, comment,
-            } = item;
+        comments.map((item) => {
+          const {
+            id, author, date, comment,
+          } = item;
 
-            return (
-              <Fade in key={id}>
-                <Row>
-                  <CardText>{comment}</CardText>
-                  <CardText>{`-- ${author}, ${date}`}</CardText>
-                  <CardText> </CardText>
-                  <CardText> </CardText>
-                </Row>
-              </Fade>
-            );
-          })}
-        </Stagger>
+          return (
+            <Row key={id}>
+              <CardText>{comment}</CardText>
+              <CardText>{`-- ${author}, ${date}`}</CardText>
+              <CardText> </CardText>
+              <CardText> </CardText>
+            </Row>
+          );
+        })
       );
 
       return (
@@ -192,20 +187,13 @@ function RenderDish({ dish }) {
   return (
 
     <Col xs={6} md={6} key={dish.id}>
-      <FadeTransform
-        in
-        transformProps={{
-          exitTransform: 'scale(0.5) translateY(-50%)',
-        }}
-      >
-        <Card className="item">
-          <CardImg src={baseUrl + image} alt={name} />
-          <CardBody>
-            <CardTitle>{name}</CardTitle>
-            <CardText>{description}</CardText>
-          </CardBody>
-        </Card>
-      </FadeTransform>
+      <Card className="item">
+        <CardImg src={baseUrl + image} alt={name} />
+        <CardBody>
+          <CardTitle>{name}</CardTitle>
+          <CardText>{description}</CardText>
+        </CardBody>
+      </Card>
     </Col>
   );
 }

@@ -5,7 +5,6 @@ import {
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { actions } from 'react-redux-form';
-import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import Menu from '../menu/MenuComponent';
 import Header from '../HeaderComponent';
 import Home from '../HomeComponentt';
@@ -47,7 +46,6 @@ class Main extends Component {
       dishes,
       postComment,
       resetFeedbackForm,
-      location,
     } = this.props;
 
     const HomePage = () => (
@@ -79,18 +77,14 @@ class Main extends Component {
     return (
       <div>
         <Header />
-        <TransitionGroup>
-          <CSSTransition key={location.key} classNames="page" timeout={300}>
-            <Switch location={location}>
-              <Route path="/home" component={HomePage} />
-              <Route exact path="/menu" component={() => <Menu dishes={dishes} />} />
-              <Route path="/menu/:dishId" component={DishWithId} />
-              <Route exact path="/contactus" component={() => <Contact resetFeedbackForm={resetFeedbackForm} />} />
-              <Route exact path="/aboutus" component={() => <About leaders={leaders} />} />
-              <Redirect to="/ " />
-            </Switch>
-          </CSSTransition>
-        </TransitionGroup>
+        <Switch>
+          <Route path="/home" component={HomePage} />
+          <Route exact path="/menu" component={() => <Menu dishes={dishes} />} />
+          <Route path="/menu/:dishId" component={DishWithId} />
+          <Route exact path="/contactus" component={() => <Contact resetFeedbackForm={resetFeedbackForm} />} />
+          <Route exact path="/aboutus" component={() => <About leaders={leaders} />} />
+          <Redirect to="/ " />
+        </Switch>
         <Footer />
       </div>
     );
@@ -106,7 +100,6 @@ Main.propTypes = {
   fetchDishesAndComments: PropTypes.func.isRequired,
   fetchPromos: PropTypes.func.isRequired,
   resetFeedbackForm: PropTypes.func.isRequired,
-  location: PropTypes.number.isRequired,
 };
 
 Main.defaultProps = {
