@@ -4,9 +4,9 @@ import {
   CardTitle, CardSubtitle,
 } from 'reactstrap';
 import PropTypes from 'prop-types';
-import './HomeComponent.scss';
-import { Loading } from './LoadingComponent';
-import { baseUrl } from '../shared/baseUrl';
+import './Home.scss';
+import { Loading } from '../loading/Loading';
+import { baseUrl } from '../../shared/baseUrl';
 
 function RenderCard({ item, isLoading, errMess }) {
   if (isLoading) {

@@ -5,8 +5,8 @@ import {
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import './AboutComponent.scss';
-import { baseUrl } from '../shared/baseUrl';
+import './About.scss';
+import { baseUrl } from '../../shared/baseUrl';
 
 const RenderLeader = ({ leader }) => {
   const {

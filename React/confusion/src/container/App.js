@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-import Main from './components/main/MainComponent';
+import Main from '../components/main/Main';
 
 import './App.css';
-import { ConfigureStore } from './redux/configureStore';
+import { ConfigureStore } from '../redux/configureStore';
 
 const store = ConfigureStore();
 

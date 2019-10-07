@@ -5,13 +5,13 @@ import {
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { actions } from 'react-redux-form';
-import Menu from '../menu/MenuComponent';
-import Header from '../HeaderComponent';
-import Home from '../HomeComponentt';
-import Footer from '../FooterComponent';
-import About from '../AboutComponent';
-import Contact from '../ContactComponent';
-import DishDetail from '../dish-detail/DishDetailComponent';
+import Menu from '../menu/Menu';
+import Header from '../header/Header';
+import Home from '../home/Home';
+import Footer from '../footer/Footer';
+import About from '../about/About';
+import Contact from '../contact/Contact';
+import DishDetail from '../dish-detail/DishDetail';
 import {
   postComment as postCommentRedux, postFeedback as postFeedbackRedux,
   fetchDishesAndComments, fetchPromos, fetchLeaders,

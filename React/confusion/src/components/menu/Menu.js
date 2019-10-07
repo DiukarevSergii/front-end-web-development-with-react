@@ -4,8 +4,8 @@ import {
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import './MenuComponent.scss';
-import { Loading } from '../LoadingComponent';
+import './Menu.scss';
+import { Loading } from '../loading/Loading';
 import { baseUrl } from '../../shared/baseUrl';
 
 function RenderMenuItem({ dish }) {

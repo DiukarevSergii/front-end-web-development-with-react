@@ -12,9 +12,9 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Row, Col } from 'react-bootstrap';
 import { isEmpty } from 'lodash';
-import './DishDetailComponent.scss';
+import './DishDetail.scss';
 import { Control, Errors, LocalForm } from 'react-redux-form';
-import { Loading } from '../LoadingComponent';
+import { Loading } from '../loading/Loading';
 import { baseUrl } from '../../shared/baseUrl';
 
 class CommentForm extends Component {
